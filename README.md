@@ -6,7 +6,8 @@ The project was developped by the following students:
 - André Silva Telles
 - Pedro Henrique Gomes Peixoto Januario
 - Lucas Fernando Witzel Camara Ferreira
-- 
+- Hugo Dufaure
+- Victor Pitaud
 
 A description of the time spent by each member of the group can be found in the following google docs [Minutes](https://docs.google.com/document/d/1ip8Fn2TrOVNnO6Dm6i7wM7AYpX1K7B0Thc0zg_zZwMU/edit?usp=sharing)
 
