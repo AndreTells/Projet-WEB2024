@@ -20,7 +20,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 		<img src="./assets/logos/instagram.png" alt="Instagram">
 	</div>
 	<div>
-		Tout droit réservé
+		Tout droit réservés
 	</div>
 </div>
 
