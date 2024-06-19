@@ -9,16 +9,19 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
-<div id="pied">
-
-<?php
-// Si l'utilisateur est connecte, on affiche un lien de deconnexion 
-if (valider("connecte","SESSION"))
-{
-	echo "Utilisateur <b>$_SESSION[pseudo]</b> connecté depuis <b>$_SESSION[heureConnexion]</b> &nbsp; "; 
-	echo "<a href=\"controleur.php?action=Logout\">Se Déconnecter</a>";
-}
-?>
+<div id="footer" class="frow">
+	<div>
+		<strong>Blabla 2i</strong>
+	</div>
+	<div id="social_medias">
+		<img src="./assets/logos/facebook.png" alt="Facebook">
+		<img src="./assets/logos/linkedin.png" alt="Linkedin">
+		<img src="./assets/logos/youtube.png" alt="YouTube">
+		<img src="./assets/logos/instagram.png" alt="Instagram">
+	</div>
+	<div>
+		Tout droit réservé
+	</div>
 </div>
 
 </body>
