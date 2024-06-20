@@ -40,3 +40,8 @@
     background-color: #FF8C21;
     border-radius: 100px;
 }
+
+.img-container img {
+    max-width: 100%; /* Image responsive */
+    height: auto; /* Conserver les proportions */
+}
