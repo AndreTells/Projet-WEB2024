@@ -9,18 +9,18 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
-<div id="footer" class="frow">
-	<div>
+<div  class="row text-center fixed-bottom">
+	<div class="col-3">
 		<strong>Blabla 2i</strong>
 	</div>
-	<div id="social_medias">
+	<div id="social_medias" class="col-6">
 		<img src="./assets/logos/facebook.png" alt="Facebook">
 		<img src="./assets/logos/linkedin.png" alt="Linkedin">
 		<img src="./assets/logos/youtube.png" alt="YouTube">
 		<img src="./assets/logos/instagram.png" alt="Instagram">
 	</div>
-	<div>
-		Tout droit réservés
+	<div class="col-3">
+		Tout droit réservé
 	</div>
 </div>
 

@@ -34,3 +34,9 @@
 #footer{
     justify-content: space-around;
 }
+
+.course img{
+    height: 30px;
+    background-color: #FF8C21;
+    border-radius: 100px;
+}

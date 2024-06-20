@@ -33,7 +33,7 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 		break;
 
 		case "profil" : 
-			//include("templates/profil.php");
+			include("templates/profil.php");
 		break; 
 
 
