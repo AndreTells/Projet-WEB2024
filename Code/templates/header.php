@@ -1,8 +1,7 @@
 <?php
 
 // Si la page est appelée directement par son adresse, on redirige en passant pas la page index
-if (basename($_SERVER["PHP_SELF"]) != "index.php")
-{
+if (basename($_SERVER["PHP_SELF"]) != "index.php") {
 	header("Location:../index.php");
 	die("");
 }
@@ -17,7 +16,8 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <!-- **** H E A D **** -->
-<head>	
+
+<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
 	<title>Blabla 2i</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -28,22 +28,25 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 
 
 <!-- **** B O D Y **** -->
+
 <body>
 
-<nav id="banner" class="navbar navbar-expand-lg fixed-top">
-  <span class="navbar-brand mb-0 h1">Blabla 2i</span>
-  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
-  <div class="navbar-nav">
-				<a class="nav-link" href="index.php?view=course_form">Créer un trajet</a>
-				<a class="nav-link" href="index.php?view=messages">Messagerie</a>
-				<a class="nav-link" href="index.php?view=reservation">Réserver un véhicule</a>
-				<a class="nav-link" href="index.php?view=course_list">Voir les trajets prévus</a>
+	<nav class="navbar navbar-expand-lg bg-main-color">
+		<div class="container-fluid">
+			<span class="navbar-brand mb-0 h1">Blabla 2i</span>
+			<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
+				<div class="navbar-nav d-flex justify-content-between align-items-center">
+					<a class="nav-link" href="index.php?view=course_form">Créer un trajet</a>
+					<a class="nav-link" href="index.php?view=messages">Messagerie</a>
+					<a class="nav-link" href="index.php?view=reservation">Réserver un véhicule</a>
+					<a class="nav-link" href="index.php?view=course_list">Voir les trajets prévus</a>
+					<div id="profil" class="nav-link">
+						<img src="./assets/profile_picture.jpg" alt="Photo de profil" id="profile_picture">
+					</div>
+				</div>
 			</div>
-			<div id="profil">
-				<img src="./assets/profile_picture.jpg" alt="Photo de profil" id="profile_picture">
-			</div>
-  </div>
-</nav>
+		</div>
+	</nav>
