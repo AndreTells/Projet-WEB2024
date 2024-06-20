@@ -34,7 +34,11 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 
 		case "profil" : 
 			include("templates/profil.php");
-		break; 
+		break;
+
+        case "contact" :
+            include("templates/contact.php");
+            break;
 
 
 		default : // si le template correspondant à l'argument existe, on l'affiche
