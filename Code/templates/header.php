@@ -30,7 +30,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 <!-- **** B O D Y **** -->
 <body>
 
-<nav id="banner" class="navbar navbar-expand-lg fixed-top">
+<nav id="banner" class="navbar navbar-expand-lg">
   <span class="navbar-brand mb-0 h1">Blabla 2i</span>
   <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,9 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 				<a class="nav-link" href="index.php?view=messages">Messagerie</a>
 				<a class="nav-link" href="index.php?view=reservation">Réserver un véhicule</a>
 				<a class="nav-link" href="index.php?view=course_list">Voir les trajets prévus</a>
-			</div>
+                <a class="nav-link" href="index.php?view=contact">Nous contacter</a>
+
+  </div>
 			<div id="profil">
 				<img src="./assets/profile_picture.jpg" alt="Photo de profil" id="profile_picture">
 			</div>
