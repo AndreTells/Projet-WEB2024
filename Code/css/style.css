@@ -1,14 +1,11 @@
-#banniere {
+
+/* Profil */
+
+#banner {
     background-color: #E98B2C;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: 70px;
-    margin: -8px;
 }
 
-#banniere a{
+#banner a{
     text-decoration: none;
     color: black;
 }
@@ -16,38 +13,17 @@
 .profile_block{
     background-color: #f6af68;
     border-radius: 30px;
-    margin: 5px;
-    padding: 20px;
-    width: fit-content;
 }
 
 #profile_body{
     z-index: -1;
     background-color: #f9c590;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* A changer */
-    height: 650px;
 }
 
 #profile_picture{
     height: 50px;
     border-radius: 100px;
     margin-right: 20px;
-}
-
-.frow{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .profile_content h4{
