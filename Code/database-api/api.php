@@ -6,10 +6,10 @@
 
 include_once "utils.php";
 include_once "constants.php";
+include_once "crudOperations/accounts.php";
 
-// TODO: move files that aren't public to outside public directory (?)
-// TODO: check if creating a session is necessary
-// session_start();
+// @todo: move files that aren't public to outside public directory (?)
+session_start();
 $apiUri = validate("REQUEST_URI", "SERVER");
 
 if(!$apiUri) apiSendResp(RESP_INTERNAL_ERROR);
@@ -22,9 +22,25 @@ switch($apiRequest[0]){
 		$response["content"] = "test";
 		apiSendResp($response);
 		break;
+
+	case '':
+	case 'authenticate':
+		$user = validate("user","POST");
+		$password = validate("password", "POST");
+		if(!($user and $password)) apiSendResp(RESP_BAD_REQUEST);
+
+		$hash = authenticate($user,$password);
+		if(!$hash) apiSendResp(RESP_BAD_REQUEST);
+
+		$response = RESP_OK;
+		$response["hash"] = $hash;
+		apiSendResp($response);
+		break;
 	default:
 		apiSendResp(RESP_NOT_IMPLEMENTED);
 		break;
 }
+
+apiSendResp(RESP_INTERNAL_ERROR);
 die("");
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 // V1.0 du 18 mai 2018
 // mostly a copy from the file maLibUtils.php provided during the course
 
