@@ -99,7 +99,7 @@
 }
 
 .background-section {
-    background-image: url("./assets/background_covoiturage.png");
+    background-image: url("../assets/background_covoiturage.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

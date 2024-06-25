@@ -1,12 +1,15 @@
-<div class="container mt-4 background-section">
-    <div class="h1 text-center mt-2" style="font-weight: bold;">Blabla 2i</div> <br>
-    <div class="subtitle text-center mt-2"> Oubliez tous vos soucis, il y a Blabla 2i <br> La première plateforme de covoiturage entre le site de Centrale Lille et le site de l'IG2I à Lens</div>
-    <button type="button" class="mt-4 btn btn btn-dark position-relative top-100 start-50 translate-middle">Trouver mon trajet</button>
+<div class="mb-5">
+    <div class="background-section mb-3">
+        <div class="mt-4 container">
+            <div class="h1 text-center mt-2" style="font-weight: bold;">Blabla 2i</div> <br>
+            <div class="subtitle text-center mt-2"> Oubliez tous vos soucis, il y a Blabla 2i <br> La première plateforme de covoiturage entre le site de Centrale Lille et le site de l'IG2I à Lens</div>
+            <button type="button" class="mt-4 btn btn btn-dark position-relative top-100 start-50 translate-middle">Trouver mon trajet</button>
 
-    <div class="ms-4 h4" style="font-weight: bold;">Economisez du temps, de l’argent...</div> <br>
-    <div class="ms-4 subtitle"> ... Et faites plaisir à la planète ! On estime à 12 % l'économie d'émission de gaz à effet de serre à l'échelle d'une voiture en covoiturage</div>
-    <button type="button" class="ms-4 mt-4 btn btn btn-dark">Trouver mon trajet</button>
-
+            <div class="ms-4 h4" style="font-weight: bold;">Economisez du temps, de l’argent...</div> <br>
+            <div class="ms-4 subtitle"> ... Et faites plaisir à la planète ! On estime à 12 % l'économie d'émission de gaz à effet de serre à l'échelle d'une voiture en covoiturage</div>
+            <button type="button" class="ms-4 mt-4 btn btn btn-dark">Trouver mon trajet</button>
+        </div>
+    </div>
     <div class="h4 text-center" style="font-weight: bold;">Trouver le covoiturage parfait n'a jamais été aussi <span class="orange-bold-text" style="color: #EA8A2C; font-weight: bold;">simple.</span> </div> <br>
 
     <div class="mt-4 btn-group position-relative top-100 start-50 translate-middle" role="group" aria-label="radio sens button group">
@@ -36,6 +39,7 @@
 
     <hr>
     <div class="h4 text-center" style="font-weight: bold;"> Ils parlent de nous </div> <br>
+
 
     <div class="container mt-2">
         <div class="quotes-container">
