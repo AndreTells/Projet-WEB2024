@@ -1,4 +1,5 @@
 <?php
+include_once "constants.php";
 // V1.0 du 18 mai 2018
 // mostly a copy from the file maLibUtils.php provided during the course
 
@@ -101,5 +102,13 @@ function protect($str)
 function apiSendResp($response){
 	echo json_encode($response);	
 	die("");
+}
+
+/**
+ * If the user has authenticated, it does nothing. Otherwise, it returns with the Unauthorized api access response
+ * @param boolean $connected 
+**/
+function loginGuard($connected){
+	if(!$connected) apiSendResp(RESP_UNAUTHORIZED);
 }
 ?>
