@@ -42,7 +42,11 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 
         case "compte":
             include("templates/compte.php");
-            break;
+        break;
+
+		case "liste_trajets":
+			include("templates/listes_trajets.php");
+		break;
 
 
 		default : // si le template correspondant à l'argument existe, on l'affiche
