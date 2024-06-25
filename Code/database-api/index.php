@@ -4,6 +4,10 @@
  * Re-route api requests to the appropriate files safely
 **/
 
+//register apicalls
+$registredPaths = array();
+$pathHandler    = array();
+
 include_once "utils.php";
 include_once "constants.php";
 include_once "crudOperations/accounts.php";
@@ -11,13 +15,10 @@ include_once "crudOperations/accounts.php";
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");
 header("Access-Control-Allow-Headers: *");
-//register apicalls
 
-$registredPaths = array();
-$pathHandler    = array();
 
 // example of how to register a new subdomain list
-// registerSubdomainList(["GET_test1","GET_test2"], function() {apiSendResp(RESP_OK);});
+ registerSubdomainList(["GET_test1","GET_test2"], function() {apiSendResp(RESP_OK);});
 
 
 // @todo: move files that aren't public to outside public directory (?)

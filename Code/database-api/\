@@ -128,7 +128,7 @@ function registerSubdomain($path, $handler){
 /**
  * executes registerSubdomain for every element in paths 
  * @param array[string] $path uri path of the new api request url
- * @param function() $handler function that will decided what to do based on the given api request 
+ * @param function(str) $handler function that will decided what to do based on the given api request 
  * @see registerSubdomain
 **/
 function registerSubdomainList($paths, $handler){
@@ -138,8 +138,10 @@ function registerSubdomainList($paths, $handler){
 }
 
 /**
- * creates a regex limiter that matches if and only if the given string is a registered path
- * @return string a regex delimeter 
+ * executes registerSubdomain for every element in paths 
+ * @param array[string] $path uri path of the new api request url
+ * @param function(str) $handler function that will decided what to do based on the given api request 
+ * @see registerSubdomain
 **/
 function getRegisterPathsRegex(){
 	global $registredPaths;
@@ -147,10 +149,6 @@ function getRegisterPathsRegex(){
 	return "^(".implode('|',$registredPaths).")";
 }
 
-/**
- * executes the handler for a given $path
- * @param string $path a registered path for the api, which is to say a path that is associated to a handler in apiHandler
-**/
 function executeHandler($path){
 	global $pathHandler;
 	$pathHandler[$path]();
