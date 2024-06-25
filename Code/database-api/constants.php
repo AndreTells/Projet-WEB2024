@@ -1,7 +1,20 @@
 <?php
+/**
+ * Variable containing the url to the api base url in the server
+ * @var string 
+**/
 const API_ROOT  = "/Project-WEB2024/Code/database-api/api.php/";
+
+/**
+ * Variable containing the nanme of the current api 
+ * @var string 
+**/
 const API_NAME = "DataBaseApi-ProjectWEB2024";
 
+/**
+ * Constants containing an array with a base to be used for the given type of response
+ * @var array
+**/
 //Successful responses
 const RESP_OK                = array("status"=>200, "apiname"=>API_NAME, "success"=> true  ); 
 
