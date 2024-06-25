@@ -42,10 +42,10 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 					<a class="nav-link" href="index.php?view=course_form">Créer un trajet</a>
 					<a class="nav-link" href="index.php?view=messages">Messagerie</a>
 					<a class="nav-link" href="index.php?view=reservation">Réserver un véhicule</a>
-					<a class="nav-link" href="index.php?view=course_list">Voir les trajets prévus</a>
-					<div id="profil" class="nav-link">
+					<a class="nav-link" href="index.php?view=liste_trajets">Voir les trajets prévus</a>
+					<a href="index.php?view=profil" id="profil" class="nav-link">
 						<img src="./assets/profile_picture.jpg" alt="Photo de profil" id="profile_picture">
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
