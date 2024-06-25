@@ -1,11 +1,5 @@
 <?php
 /**
- * Variable containing the url to the api base url in the server
- * @var string 
-**/
-const API_ROOT  = "/Project-WEB2024/Code/database-api/api.php/";
-
-/**
  * Variable containing the nanme of the current api 
  * @var string 
 **/
