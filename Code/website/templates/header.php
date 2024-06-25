@@ -40,7 +40,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 			<div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg" aria-labelledby="navbarOffcanvasLgLabel">
 				<div class="navbar-nav d-flex justify-content-between align-items-center">
                     <a class="nav-link" href="index.php">Accueil</a>
-                    <a class="nav-link" href="index.php?view=course_form">Créer un trajet</a>
+                    <a class="nav-link" href="index.php?view=trajet">Créer un trajet</a>
 					<a class="nav-link" href="index.php?view=messages">Messagerie</a>
 					<a class="nav-link" href="index.php?view=reservation">Réserver un véhicule</a>
 					<a class="nav-link" href="index.php?view=liste_trajets">Voir les trajets prévus</a>

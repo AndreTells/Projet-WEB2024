@@ -50,7 +50,9 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 		case "liste_trajets":
 			include("templates/liste_trajets.php");
 		break;
-
+        case "trajet":
+            include("templates/trajet.php");
+            break;
 		case "page":
 			include("templates/page.php");
 		break;
