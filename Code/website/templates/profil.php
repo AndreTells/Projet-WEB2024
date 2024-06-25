@@ -31,5 +31,7 @@
                 <a href="#"><img src="./assets/arrow_btn.png" alt="arrow button"></a>
             </div>
         </div>
+        <br>
+        <a class="ms-2 btn btn-primary" href="index.php?view=settings" role="button">Changer mes informations</a>
     </div>
 </div>

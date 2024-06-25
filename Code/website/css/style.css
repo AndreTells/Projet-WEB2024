@@ -5,10 +5,6 @@
     background-color: #E98B2C;
 }
 
-.bg-secondary-color{
-    background-color: #f6af68;
-}
-
 #banner a{
     text-decoration: none;
     color: black;
@@ -25,7 +21,7 @@
 }
 
 #profile_picture{
-    height: 4rem;
+    height: 50px;
     border-radius: 100px;
     margin-right: 20px;
 }
@@ -40,7 +36,7 @@
 }
 
 .course img{
-    height: 1.5rem;
+    height: 30px;
     background-color: #FF8C21;
     border-radius: 100px;
 }
@@ -79,5 +75,34 @@
     height: auto; /* Conserver les proportions */
 }
 
-/* Page des trajets/véhicules */
 
+
+.subtitle {
+    color: #828282; /* Couleur du sous-titre */
+}
+.btn-outline-orange {
+    color: #EA8A2C;
+    border-color: #EA8A2C;
+}
+.quote-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    margin: 10px;
+    flex: 1;
+}
+.quotes-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.background-section {
+    background-image: url("./assets/background_covoiturage.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #333;
+    padding: 50px 0; /* Ajouter un espace autour du contenu pour éviter que le texte ne se confonde avec l'image de fond */
+}
