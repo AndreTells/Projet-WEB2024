@@ -111,4 +111,32 @@ function apiSendResp($response){
 function loginGuard($connected){
 	if(!$connected) apiSendResp(RESP_UNAUTHORIZED);
 }
+
+function registerSubdomain($path, $handler){
+	global $registredPaths;
+	global $pathHandler;
+	$registredPaths[] = $path;
+	$pathHandler[$path] = $handler;
+}
+
+function registerSubdomainList($paths, $handler){
+	global $registredPaths;
+	global $pathHandler;
+	foreach($paths as $path){
+		$registredPaths[] = $path;
+		$pathHandler[$path] = $handler;
+	}
+}
+
+function getRegisterPathsRegex(){
+	global $registredPaths;
+	if(empty($registredPaths)) return 'matchnothing^';
+	return "^(".implode('|',$registredPaths).")";
+}
+
+function executeHandler($path){
+	global $pathHandler;
+	$pathHandler[$path]();
+}
+
 ?>
