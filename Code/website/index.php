@@ -46,7 +46,11 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
         case "settings":
             include("templates/settings.php");
             break;
-		
+
+		case "liste_trajets":
+			include("templates/liste_trajets.php");
+		break;
+
 		case "page":
 			include("templates/page.php");
 		break;

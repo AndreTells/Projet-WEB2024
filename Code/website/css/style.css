@@ -1,15 +1,24 @@
 
-/* Profil */
+body{
+    margin-bottom: 100px;
+}
 
 .bg-main-color{
     background-color: #E98B2C;
 }
+
+.bg-secondary-color{
+    background-color: #f6af68;
+}
+
 
 #banner a{
     text-decoration: none;
     color: black;
 }
 
+
+/* Profil */
 .profile_block{
     background-color: #f6af68;
     border-radius: 30px;
@@ -70,9 +79,23 @@
     margin-left: 10px;
     background-color: green;
 }   
+
+/* page de trajets / véhicules */
+
+#page-img{
+    border-radius: 40px;
+}
+
+
 .img-container img {
     max-width: 100%; /* Image responsive */
     height: auto; /* Conserver les proportions */
+}
+
+.pp{
+    height: 4rem;
+    width: auto;
+    border-radius: 100px;
 }
 
 

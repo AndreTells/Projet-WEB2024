@@ -11,7 +11,7 @@
             <p class="align-text-bottom">Conducteur : Hugo Dufaure</p>
         </div>
         <div class="col-2">
-            <a href="#"><img src="./assets/arrow_btn.png" alt="arrow button"></a>
+            <a href="./index.php?view=page"><img src="./assets/arrow_btn.png" alt="arrow button"></a>
         </div>
     </div>
 
@@ -27,7 +27,7 @@
             <p class="align-text-bottom">Conducteur : Victor Pitaud</p>
         </div>
         <div class="col-2">
-            <a href="#"><img src="./assets/arrow_btn.png" alt="arrow button"></a>
+            <a href="./index.php?view=page"><img src="./assets/arrow_btn.png" alt="arrow button"></a>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
             <p class="align-text-bottom">Lieu : Centrale</p>
         </div>
         <div class="col-2">
-            <a href="#"><img src="./assets/arrow_btn.png" alt="arrow button"></a>
+            <a href="./index.php?view=page"><img src="./assets/arrow_btn.png" alt="arrow button"></a>
         </div>
     </div>
 </div>
