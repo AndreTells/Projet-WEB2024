@@ -45,7 +45,6 @@
     border-radius: 100px;
 }
 
-<<<<<<< HEAD:Code/css/style.css
 /* Listes des trajets */
 
 .trajet{
@@ -64,13 +63,21 @@
     height: 3rem;
 }
 
+.disponible{
+    display: flex;
+    flex-direction: row;
+}
+
 .indicateur{
     height:1rem;
     width:1rem;
+    margin-left: 10px;
     background-color: green;
-=======
+}   
 .img-container img {
     max-width: 100%; /* Image responsive */
     height: auto; /* Conserver les proportions */
->>>>>>> 1724f72d446b75da7be988b0dcd56b2a079c5689:Code/website/css/style.css
 }
+
+/* Page des trajets/véhicules */
+

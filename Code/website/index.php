@@ -47,6 +47,10 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 		case "liste_trajets":
 			include("templates/listes_trajets.php");
 		break;
+		
+		case "page":
+			include("templates/page.php");
+		break;
 
 
 		default : // si le template correspondant à l'argument existe, on l'affiche

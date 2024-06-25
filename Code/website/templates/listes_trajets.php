@@ -39,7 +39,10 @@
             <p>Nombres de places</p>
         </div>
         <div class="col-3 align-text-bottom">
-            <div class="row"><p class="col align-text-bottom">Disponible : </p> <div class="indicateur col"></div></div>
+            <div class="disponible">
+                <p class="align-text-bottom">Disponible : </p> 
+                <div class="indicateur mt-1"></div>
+            </div>
             <p class="align-text-bottom">Lieu : Centrale</p>
         </div>
         <div class="col-2">
