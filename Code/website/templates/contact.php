@@ -37,7 +37,7 @@
                 </div>
             </form></div>
     </div>
-    <div class="col-6">
+    <div class="col-6 img-container">
         <img src="./assets/covoiturage.jpg" alt="Covoiturage Image">
     </div>
     </div>
