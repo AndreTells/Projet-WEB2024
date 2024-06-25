@@ -1,3 +1,4 @@
+ok
 <div class="container mt-4 background-section">
     <div class="h1 text-center mt-2" style="font-weight: bold;">Blabla 2i</div> <br>
     <div class="subtitle text-center mt-2"> Oubliez tous vos soucis, il y a Blabla 2i <br> La première plateforme de covoiturage entre le site de Centrale Lille et le site de l'IG2I à Lens</div>
