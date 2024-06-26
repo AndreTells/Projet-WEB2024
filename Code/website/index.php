@@ -55,6 +55,10 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 			include("templates/page.php");
 		break;
 
+		case "messages":
+			include("templates/messages.php");
+		break;
+
 		default : // si le template correspondant à l'argument existe, on l'affiche
 			if (file_exists("templates/$view.php"))
 				include("templates/$view.php");

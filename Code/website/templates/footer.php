@@ -9,7 +9,7 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 ?>
 
-<div id="footer" class="footer mt-5 py-1 d-flex justify-content-around align-items-center bg-secondary-color">
+<div id="footer" class="pt-2 d-flex justify-content-around align-items-center fixed-bottom bg-secondary-color">
 	<div>
 		<strong>Blabla 2i</strong>
 	</div>

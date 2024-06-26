@@ -129,3 +129,57 @@ body{
     color: #333;
     padding: 50px 0; /* Ajouter un espace autour du contenu pour éviter que le texte ne se confonde avec l'image de fond */
 }
+
+
+/* Messagerie */
+
+.selected{
+    background-color: rgb(232, 232, 232);
+}
+
+#conversation{
+    position: relative;
+}
+
+#conversation input{
+    position: absolute;
+    bottom : 0px;
+    left: 0px;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 25px;
+}
+
+.message{
+    position: absolute;
+    width: fit-content;
+    padding: 0.5rem;
+}
+
+.rm{
+    background-color: lightgrey;
+    left: 0px;
+    border-radius: 0px 25px 25px 25px;
+}
+
+.sm{
+    background-color: lightsalmon;
+    border-radius: 25px 25px 0px 25px;
+    right: 0px;
+    
+}
+
+#temp-m2{
+    /* top doit être mis en place en fonction de l'ordre des messages lors de la récupération*/
+    top: 6rem;
+}
+
+#temp-m3{
+    /* top doit être mis en place en fonction de l'ordre des messages lors de la récupération*/
+    top: 9rem;
+}
+
+#temp-m4{
+    /* top doit être mis en place en fonction de l'ordre des messages lors de la récupération*/
+    top: 12rem;
+}
