@@ -39,19 +39,6 @@ switch($apiStr){
 		apiSendResp($response);
 		break;
 
-	case 'POST_authenticate':
-		$user = validate("user","POST");
-		$password = validate("password", "POST");
-		if(!($user and $password)) apiSendResp(RESP_BAD_REQUEST);
-
-		$hash = authenticate($user,$password);
-		if(!$hash) apiSendResp(RESP_BAD_REQUEST);
-
-		$response = RESP_OK;
-		$response["hash"] = $hash;
-		apiSendResp($response);
-		break;
-
 	case (bool)preg_match("/^(".getRegisterPathsRegex().")/", $apiStr):
 		executeHandler($apiStr);
 		break;

@@ -6,8 +6,17 @@
 
 include_once "utils.php";
 include_once "sqlUtils/sqlFunctions.pdo.php";
-registerSubdomain("POST_create-user", function(){
 
+registerSubdomain("POST_create-user",'createUser');
+registerSubdomain("POST_authenticate",'authenticate'); 
+
+/**
+ * Creates a user with the given parameters
+ * @param   string $user
+ * @param   string $password
+ * @return  string hash for the user that was just created 
+**/
+function createUser(){
 	$name       = validate("name"       , "REQUEST");
 	$password   = validate("password"   , "REQUEST");
 	$mail       = validate("mail"       , "REQUEST");
@@ -16,39 +25,55 @@ registerSubdomain("POST_create-user", function(){
 
 	if(!($name and $password and $mail and $description and $job)) apiSendResp(RESP_BAD_REQUEST);
 
-	$result = RESP_OK;
-	$result["hash"] = createUser($name,$password,$mail,$description,$job);
-	apiSendResp($result);
-});
+	
+	$name        = protect($name);
+	$password    = protect($password);
+	$mail        = protect($mail);
+	$description = protect($description);
+	$job         = protect($job);
 
-/**
- * Creates a user with the given parameters
- * @param   string $user
- * @param   string $password
- * @return  string hash for the user that was just created 
-**/
-function createUser($name, $password, $mail,$description, $job){
 
 	$hash = password_hash($password, PASSWORD_DEFAULT);
-	$SQL = "INSERT INTO `Account` (`id`, `name`, `hash`, `mail`, `description`, `job`, `admin`) VALUES (NULL,'{$name}', '{$hash}', '{$mail}', '{$description}', '{$job}', '0');";
+	$SQL = "INSERT INTO `Account` VALUES (NULL,'{$name}', '{$hash}', '{$mail}', '{$description}', '{$job}', '0');";
 
 	SQLInsert($SQL);
 
-	return $hash;
+	
+	$result = RESP_OK;
+	$result["hash"] = $hash;
+	apiSendResp($result);
 }
 
 /**
  * Validates wheather or not a $user $password pair is a valid user in the database. If so, it returns the hash of the
  * specified user and false otherwise
 **/
-function authenticate($user, $password){
-	//check if database contains user where name = $user & hash = password_hash($password, PASSWORD_DEFAULT)
-	//$hash = ...
-	//if(password_verify($password, $user))
-	//	save user to session
-	//	return hash
-		return "aaaaaaaaaaaaa";
-	return false;
+function authenticate(){
+	$name       = validate("name"       , "REQUEST");
+	$password   = validate("password"   , "REQUEST");
+	if(!($name and $password)) apiSendResp(RESP_BAD_REQUEST);
+
+	$name = protect($name);
+	$password = protect($password);
+
+	$SQL = "SELECT hash FROM `Account` WHERE name='{$name}'";
+	$hash = SQLGetChamp($SQL);
+
+	if(!$hash) apiSendResp(RESP_UNAUTHORIZED);
+
+	if(!password_verify($password, $hash)) apiSendResp(RESP_UNAUTHORIZED);
+
+	$result = RESP_OK;
+	$result["hash"] = $hash;
+	apiSendResp($result);
 }
 
+
+function hashToId($hash){
+	$hash = protect($hash);	
+
+	$SQL = "SELECT 'id' FROM `Account` WHERE hash={$hash}";
+	$user = parcoursRs(SQLGetChamp($SQL)); 
+	return $user["id"];
+}
 ?>
