@@ -8,16 +8,26 @@ include_once "utils.php";
 include_once "sqlUtils/sqlFunctions.pdo.php";
 
 //Endpoints
+/**
+ * Sends a message in a given conversation with the current time
+ * @param $hash
+ * @param $conv_id
+ * @param $content
+**/
 registerEndpoint("POST_send-message",'sendMessage');
 
 // Endpoint Handlers
+/**
+ * Sends a message with the current time
+**/
 function sendMessage(){	
 	$hash       = validate("hash"       , "REQUEST");
 	$conv_id    = validate("conv_id"    , "REQUEST");
 	$content    = validate("content"    , "REQUEST");
 
 	if(!($hash and $conv_id and $content)) apiSendResp(RESP_BAD_REQUEST);
-
+	
+		
 	$user_id    = hashToId($hash);			
 	
 	$SQL = "INSERT INTO `Message` VALUES ('{$conv_id}', '{$user_id}', '".date('Y-m-d H:i:s')."', '{$content}');";	
