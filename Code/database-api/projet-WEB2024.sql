@@ -34,18 +34,19 @@ CREATE TABLE `Account` (
   `mail` varchar(255) NOT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
   `job` varchar(255) NOT NULL,
-   `admin` boolean,
-    PRIMARY KEY(`id`)
+  `profile_picture` blob,
+  `admin` boolean,
+PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `Account`
 --
 
-INSERT INTO `Account` (`id`, `name`, `hash`, `mail`, `description`, `job`,`admin`) VALUES
-(1, 'tom', 'web', 'web@example.com', 'Bio of tom', 'professor', 0),
-(2, 'pedro', 'password456', 'pedro@example.com', 'Bio of PEDRO', 'etudiant', 0),
-(3, 'WEB', '123', 'WEB@example.com', 'Bio of WEB', 'subject', 0 );
+INSERT INTO `Account` (`id`, `name`, `hash`, `mail`, `description`, `job`,`profile_picture`,`admin`) VALUES
+(1, 'tom', 'web', 'web@example.com', 'Bio of tom', 'professor',NULL, 0),
+(2, 'pedro', 'password456', 'pedro@example.com', 'Bio of PEDRO', 'etudiant',NULL, 0),
+(3, 'WEB', '123', 'WEB@example.com', 'Bio of WEB', 'subject',NULL, 0 );
 
 -- --------------------------------------------------------
 
