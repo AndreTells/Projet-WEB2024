@@ -137,13 +137,14 @@ INSERT INTO `Reservations` (`account_id`, `trip_id`) VALUES
 --
 
 CREATE TABLE `Trip` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `vehicle_id` int DEFAULT NULL,
   `conversation_id` int DEFAULT NULL,
   `from_location` varchar(255) NOT NULL,
   `to_location` varchar(255) NOT NULL,
   `places` int NOT NULL,
-  `date` datetime NOT NULL
+  `date` datetime NOT NULL,
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -161,20 +162,21 @@ INSERT INTO `Trip` (`id`, `vehicle_id`, `conversation_id`, `from_location`, `to_
 --
 
 CREATE TABLE `Vehicle` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `conductor_id` int DEFAULT NULL,
   `model` varchar(255) NOT NULL,
   `license_plate` varchar(255) NOT NULL,
-  `color` varchar(255) DEFAULT NULL
+  `max_places` int NOT NULL,
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `Vehicle`
 --
 
-INSERT INTO `Vehicle` (`id`, `conductor_id`, `model`, `license_plate`, `color`) VALUES
-(1, 1, 'Toyota Prius', 'ABC123', 'Blanc'),
-(2, 2, 'Honda Civic', 'DEF456', 'Rouge');
+INSERT INTO `Vehicle` (`id`, `conductor_id`, `model`, `license_plate`, `max_places`) VALUES
+(1, 1, 'Toyota Prius', 'ABC123', 3),
+(2, 2, 'Honda Civic', 'DEF456', 4);
 
 --
 -- Indexes for dumped tables
@@ -212,7 +214,6 @@ ALTER TABLE `Reservations`
 -- Indexes for table `Trip`
 --
 ALTER TABLE `Trip`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `vehicle_id` (`vehicle_id`),
   ADD KEY `conversation_id` (`conversation_id`);
 
@@ -220,7 +221,6 @@ ALTER TABLE `Trip`
 -- Indexes for table `Vehicle`
 --
 ALTER TABLE `Vehicle`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `conductor_id` (`conductor_id`);
 
 --

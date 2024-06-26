@@ -177,6 +177,21 @@ function parcoursRs($result)
 	return $tab;
 }
 
+// helper function related to accounts
+
+/**
+ * returns the id of the user with the given hash
+ * @param string $hash
+ * @return int 
+**/
+function hashToId($hash){
+	$hash = protect($hash);	
+
+	$SQL = "SELECT `id` FROM `Account` WHERE hash='{$hash}'";
+	$id = intval(SQLGetChamp($SQL)); 
+
+	return $id;
+} 
 
 
 

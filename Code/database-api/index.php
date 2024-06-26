@@ -11,6 +11,7 @@ $pathHandler    = array();
 include_once "utils.php";
 include_once "constants.php";
 include_once "apiEndpoints/accounts.php";
+include_once "apiEndpoints/vehicles.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");
