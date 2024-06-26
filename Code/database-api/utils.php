@@ -118,7 +118,7 @@ function loginGuard($connected){
  * @param string $path uri path of the new api request url
  * @param function(str) $handler function that will decided what to do based on the given api request 
 **/
-function registerSubdomain($path, $handler){
+function registerEndpoint($path, $handler){
 	global $registredPaths;
 	global $pathHandler;
 	$registredPaths[] = $path;
@@ -126,14 +126,14 @@ function registerSubdomain($path, $handler){
 }
 
 /**
- * executes registerSubdomain for every element in paths 
+ * executes registerEndpoint for every element in paths 
  * @param array[string] $path uri path of the new api request url
  * @param function() $handler function that will decided what to do based on the given api request 
  * @see registerSubdomain
 **/
-function registerSubdomainList($paths, $handler){
+function registerEndpointList($paths, $handler){
 	foreach($paths as $path){
-		registerSubdomain($path, $handler);
+		registerEndpoint($path, $handler);
 	}
 }
 

@@ -7,9 +7,11 @@
 include_once "utils.php";
 include_once "sqlUtils/sqlFunctions.pdo.php";
 
-registerSubdomain("POST_create-user",'createUser');
-registerSubdomain("POST_authenticate",'authenticate'); 
+registerEndpoint("POST_create-user",'createUser');
+registerEndpoint("POST_authenticate",'authenticate'); 
 
+
+// Subdomain Handlers
 /**
  * Creates a user with the given parameters
  * @param   string $user
@@ -34,7 +36,7 @@ function createUser(){
 
 
 	$hash = password_hash($password, PASSWORD_DEFAULT);
-	$SQL = "INSERT INTO `Account` VALUES (NULL,'{$name}', '{$hash}', '{$mail}', '{$description}', '{$job}', '0');";
+	$SQL = "INSERT INTO `Account` VALUES (NULL,'{$name}', '{$hash}', '{$mail}', '{$description}', '{$job}', NULL, '0');";
 
 	SQLInsert($SQL);
 
@@ -65,15 +67,37 @@ function authenticate(){
 
 	$result = RESP_OK;
 	$result["hash"] = $hash;
+
 	apiSendResp($result);
 }
 
+function getUserInfo(){
+	$hash       = validate("hash"       , "REQUEST");
 
+	$SQL = "SELECT * FROM `Account` WHERE hash='{$hash}'";
+	$userInfo = parcoursRs(SQLSelect($SQL));	
+
+	$result = RESP_OK;
+	$result["userInfo"] = $userInfo;
+	apiSendResp($result);
+}
+
+// helper function related to accounts
+
+/**
+ * returns the id of the user with the given hash
+ * @param string $hash
+ * @return int 
+**/
 function hashToId($hash){
 	$hash = protect($hash);	
 
-	$SQL = "SELECT 'id' FROM `Account` WHERE hash={$hash}";
-	$user = parcoursRs(SQLGetChamp($SQL)); 
-	return $user["id"];
-}
+	$SQL = "SELECT 'id' FROM `Account` WHERE hash='{$hash}'";
+	$id = intval(SQLGetChamp($SQL)); 
+
+	return $id;
+} 
+
+
+
 ?>
