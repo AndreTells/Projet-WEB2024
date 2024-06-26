@@ -7,16 +7,47 @@
 include_once "utils.php";
 include_once "sqlUtils/sqlFunctions.pdo.php";
 
+//Endpoints
+/**
+ * Create a user with an api call and returns the hash of the new user
+ * It cannot create admin users
+ * @param   string name
+ * @param   string password
+ * @param   string mail
+ * @param   string description
+ * @param   string job
+ * @return  string hash
+**/
 registerEndpoint("POST_create-user",'createUser');
+/**
+ * Checks if a user password pair is a valid user in the database
+ * If there is a user, the call returns the hash
+ * Otherwise, it fails with a RESP_UNAUTHORIZED 
+ * @param   string user
+ * @param   string password
+ * @return  string hash
+**/
 registerEndpoint("POST_authenticate",'authenticate'); 
 
-
-// Subdomain Handlers
 /**
- * Creates a user with the given parameters
- * @param   string $user
- * @param   string $password
- * @return  string hash for the user that was just created 
+ * Returns the text based information about the given user
+ * @param   string hash
+ * @return  string name
+ * @return  string mail
+ * @return  string job 
+**/
+registerEndpoint("GET_user-info/text",'getUserInfo');
+
+/**
+ * Returns the profile picture of the given user
+ * @param   string hash
+ * @return  string prorfile-picture 
+**/
+registerEndpoint("GET_user-info/profile-picture",'getUserProfilePicture');
+
+// Enpoint Handlers
+/**
+ * Creates a user with the parameters in the rquest
 **/
 function createUser(){
 	$name       = validate("name"       , "REQUEST");
@@ -47,7 +78,7 @@ function createUser(){
 }
 
 /**
- * Validates wheather or not a $user $password pair is a valid user in the database. If so, it returns the hash of the
+ * Validates wheather or not a $user $password pair (given in the request) is a valid user in the database. If so, it returns the hash of the
  * specified user and false otherwise
 **/
 function authenticate(){
@@ -55,8 +86,6 @@ function authenticate(){
 	$password   = validate("password"   , "REQUEST");
 	if(!($name and $password)) apiSendResp(RESP_BAD_REQUEST);
 
-	$name = protect($name);
-	$password = protect($password);
 
 	$SQL = "SELECT hash FROM `Account` WHERE name='{$name}'";
 	$hash = SQLGetChamp($SQL);
@@ -74,7 +103,7 @@ function authenticate(){
 function getUserInfo(){
 	$hash       = validate("hash"       , "REQUEST");
 
-	$SQL = "SELECT * FROM `Account` WHERE hash='{$hash}'";
+	$SQL = "SELECT `name`,`mail`,`description`,`job`  FROM `Account` WHERE hash='{$hash}';";
 	$userInfo = parcoursRs(SQLSelect($SQL));	
 
 	$result = RESP_OK;
@@ -82,7 +111,16 @@ function getUserInfo(){
 	apiSendResp($result);
 }
 
+function getUserProfilePicture(){
+	$hash       = validate("hash"       , "REQUEST");
 
+	$SQL = "SELECT `profile_picture` FROM `Account` WHERE hash='{$hash}';";
+	$userInfo = parcoursRs(SQLSelect($SQL));	
+
+	$result = RESP_OK;
+	$result["userInfo"] = $userInfo;
+	apiSendResp($result);
+}
 
 
 ?>

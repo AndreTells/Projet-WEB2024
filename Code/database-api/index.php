@@ -32,9 +32,10 @@ if(!($apiRequest and $method)) apiSendResp(RESP_BAD_REQUEST);
 
 $apiStr = $method . "_" . $apiRequest; 
 
+echo $apiStr;
 // routing to appropriate function
 switch($apiStr){
-	case (bool)preg_match("/^(".str_replace('/','\/',getRegisterPathsRegex()).")/", $apiStr):
+	case (bool)preg_match("/^(".str_replace("/","\/",getRegisterPathsRegex()).")/", $apiStr):
 		executeHandler($apiStr);
 		break;
 	default:
