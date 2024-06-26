@@ -45,6 +45,9 @@ registerEndpoint("GET_user-info/text",'getUserInfo');
 **/
 registerEndpoint("GET_user-info/profile-picture",'getUserProfilePicture');
 
+registerEndpoint("POST_user-info/update",'updateUserInfo');
+registerEndpoint("POST_user-info/delete",'deleteUser');
+
 // Enpoint Handlers
 /**
  * Creates a user with the parameters in the rquest
@@ -102,6 +105,7 @@ function authenticate(){
 
 function getUserInfo(){
 	$hash       = validate("hash"       , "REQUEST");
+	if(!$hash) apiSendResp(RESP_BAD_REQUEST);
 
 	$SQL = "SELECT `name`,`mail`,`description`,`job`  FROM `Account` WHERE hash='{$hash}';";
 	$userInfo = parcoursRs(SQLSelect($SQL));	
@@ -113,6 +117,7 @@ function getUserInfo(){
 
 function getUserProfilePicture(){
 	$hash       = validate("hash"       , "REQUEST");
+	if(!$hash) apiSendResp(RESP_BAD_REQUEST);
 
 	$SQL = "SELECT `profile_picture` FROM `Account` WHERE hash='{$hash}';";
 	$userInfo = parcoursRs(SQLSelect($SQL));	
@@ -122,5 +127,41 @@ function getUserProfilePicture(){
 	apiSendResp($result);
 }
 
+function updateUserInfo(){
+	$hash       = validate("hash"   , "REQUEST");
+	$update     = str_replace("\\", "",validate("data"   , "REQUEST")); //@todo: find a better way to do this
 
+	if(!($hash and  $update)) apiSendResp(RESP_BAD_REQUEST);
+	if(!(gettype($update) == "array")) apiSendResp(RESP_BAD_REQUEST);
+
+	$result = RESP_OK;
+	$result["hash"] = $hash;
+
+	$SQL = "UPDATE `Account` SET";
+	foreach($update as $property=>$new_value){
+		if($property == "password"){
+		       	$SQL .= "`hash` = '".password_hash($new_value, PASSWORD_DEFAULT)."' ";
+			$result["hash"] = $hash;
+		}
+		else $SQL .= "`{$property}` = '{$new_value}' ";
+
+		if($property != array_key_last($update)) $SQL.=",";
+
+	}
+
+	$SQL.= "WHERE `hash` = '{$hash}'";	
+	SQLUpdate($SQL);	
+
+	apiSendResp($result);
+}
+
+function deleteUser(){
+	$hash       = validate("hash"   , "REQUEST");
+	if(!$hash) apiSendResp(RESP_BAD_REQUEST);
+	
+	$SQL = "DELETE FROM `Account` WHERE `hash`='{$hash}';"; 
+	SQLDelete($SQL);
+
+	apiSendResp(RESP_OK);
+}
 ?>
