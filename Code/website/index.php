@@ -22,7 +22,7 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 	$view = valider("view"); 
 
 	// S'il est vide, on charge la vue accueil par défaut
-	if (!$view) $view = "profil"; 
+	if (!$view) $view = "accueil";
 
 	// En fonction de la vue à afficher, on appelle tel ou tel template
 	switch($view)
@@ -43,7 +43,23 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
         case "compte":
             include("templates/compte.php");
             break;
+        case "settings":
+            include("templates/settings.php");
+            break;
 
+		case "liste_trajets":
+			include("templates/liste_trajets.php");
+		break;
+        case "trajet":
+            include("templates/trajet.php");
+            break;
+		case "page":
+			include("templates/page.php");
+		break;
+
+		case "messages":
+			include("templates/messages.php");
+		break;
 
 		default : // si le template correspondant à l'argument existe, on l'affiche
 			if (file_exists("templates/$view.php"))

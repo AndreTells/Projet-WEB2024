@@ -1,0 +1,1103 @@
+{
+	"info": {
+		"_postman_id": "ba1bec07-bdc5-4099-be50-14252487220f",
+		"name": "training-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7838128"
+	},
+	"item": [
+		{
+			"name": "authenticate",
+			"item": [
+				{
+					"name": "{{api-root}}/authenticate?user=&password=",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api-root}}/authenticate?user=tom&password=web",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"authenticate"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "tom"
+								},
+								{
+									"key": "password",
+									"value": "web"
+								}
+							]
+						},
+						"description": "Identification auprès de l'API et récupération du hash"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/authenticate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/authenticate",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"authenticate"
+							]
+						},
+						"description": "Demande de création d'un nouveau hash pour l'utilisateur connecté"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "{{api-root}}/users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Récupération de la liste des utilisateurs de l'API"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/users/<id>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users/1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						},
+						"description": "Récupération d'un utilisateur de l'API"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/users?role=",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users?role=athlete",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "athlete"
+								}
+							]
+						},
+						"description": "Récupération de la liste des utilisateurs en fonction de leur rôle (admin, coach, athlete)"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/users?user=&password=",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users?user=toto&password=toto",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "toto"
+								},
+								{
+									"key": "password",
+									"value": "toto"
+								}
+							]
+						},
+						"description": "Création d'un nouvel utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/users?password=",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users?password=toto",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "toto"
+								}
+							]
+						},
+						"description": "Modification du mot de passe de l'utilisateur connecté\n\n(interdit pour les utilisateurs 1 et 2)"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/users?role=",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users?role=athlete",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "athlete"
+								}
+							]
+						},
+						"description": "Modification du rôle de l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/users/<id>?role=",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users/2?role=coach",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users",
+								"2"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "coach"
+								}
+							]
+						},
+						"description": "Modification du rôle d'un utilsateur"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/users/<id>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/users/4",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"users",
+								"4"
+							]
+						},
+						"description": "Suppression de l'utilisateur connecté.\n\nIl faut fournir son id.\n\nLes utilisateurs 1 et 2 ne peuvent être supprimés."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "groupes",
+			"item": [
+				{
+					"name": "{{api-root}}/groupes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes"
+							]
+						},
+						"description": "Récupération de la liste des groupes de l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes/<id>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes/1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes",
+								"1"
+							]
+						},
+						"description": "Récupération des données d'un groupe"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes?nom=",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes?nom=nom_groupe",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "nom_groupe"
+								}
+							]
+						},
+						"description": "Création d'un nouveau groupe en spécifiant son nom ; le coach est l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes/<id>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes/4",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes",
+								"4"
+							]
+						},
+						"description": "Supprime un groupe"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes/<id>/membres",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes/1/membres",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes",
+								"1",
+								"membres"
+							]
+						},
+						"description": "Récupération des identifiants des utilisateurs membres d'un groupe"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes/<id>/membres?idUser=",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes/1/membres?idUser=3",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes",
+								"1",
+								"membres"
+							],
+							"query": [
+								{
+									"key": "idUser",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Ajout d'un athlète à un groupe possédé par l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes/<id>?nom",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes/3?nom=Groupe Compétition",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes",
+								"3"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "Groupe Compétition"
+								}
+							]
+						},
+						"description": "Modification du nom d'un groupe"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes/<id>?idCoach=",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes/3?idCoach=1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes",
+								"3"
+							],
+							"query": [
+								{
+									"key": "idCoach",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Modification du coach d'un groupe par son coach actuel"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/groupes/<id>/membres/<id>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/groupes/1/membres/6",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"groupes",
+								"1",
+								"membres",
+								"6"
+							]
+						},
+						"description": "Retire un membre d'un groupe en fournissant l'id du groupe et l'id qui permet de lier l'athlète au groupe (c'est-à-dire l'id de la table training_groupes_membres et PAS l'id de l'athlète)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exercices",
+			"item": [
+				{
+					"name": "{{api-root}}/exercices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/exercices",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"exercices"
+							]
+						},
+						"description": "Récupération de la liste des exercices publics"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/exercices?mine",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/exercices?mine=1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"exercices"
+							],
+							"query": [
+								{
+									"key": "mine",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Récupération de la liste des exercices publics et privés de l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/exercices/<id>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/exercices/7",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"exercices",
+								"7"
+							]
+						},
+						"description": "Récupération d'un exercice public, ou m'appartenant"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/exercices?nom=&description=&prive=",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/exercices?nom=exo1&description=exo1&prive=0",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"exercices"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "exo1"
+								},
+								{
+									"key": "description",
+									"value": "exo1"
+								},
+								{
+									"key": "prive",
+									"value": "0"
+								}
+							]
+						},
+						"description": "Création d'un nouvel exercice en spécifiant son nom, sa description, \\[sa visibilité\\] ; le coach est l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/exercices/<id>?nom=&description=&prive=",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/exercices/8?nom=Exo&description=Description&prive=1&idCoach=1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"exercices",
+								"8"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "Exo"
+								},
+								{
+									"key": "description",
+									"value": "Description"
+								},
+								{
+									"key": "prive",
+									"value": "1"
+								},
+								{
+									"key": "idCoach",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Modification des propriétés d'un exercice"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/exercices/<id>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/exercices/10",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"exercices",
+								"10"
+							]
+						},
+						"description": "Supprime un exercice dont l'utilisateur connecté est propriétaire"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cycles",
+			"item": [
+				{
+					"name": "{{api-root}}/cycles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles"
+							]
+						},
+						"description": "Récupération de la liste des cycles publics"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles?mine",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles?mine=1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles"
+							],
+							"query": [
+								{
+									"key": "mine",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Récupération de la liste des cycles publics et privés de l'utilisateur connecté"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles?nom=&description=&prive=&nbRepetitions=&reposEntreCycles=&reposEntreExercices=",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles?nom=new_cycle&description=Description du cycle&prive=0&nbRepetitions=3&reposEntreCycles=300&reposEntreExercices=30",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "new_cycle"
+								},
+								{
+									"key": "description",
+									"value": "Description du cycle"
+								},
+								{
+									"key": "prive",
+									"value": "0"
+								},
+								{
+									"key": "nbRepetitions",
+									"value": "3"
+								},
+								{
+									"key": "reposEntreCycles",
+									"value": "300"
+								},
+								{
+									"key": "reposEntreExercices",
+									"value": "30"
+								}
+							]
+						},
+						"description": "Récupération d'un cycle public, ou m'appartenant"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles/<id>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles/1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles",
+								"1"
+							]
+						},
+						"description": "Récupération d'un cycle public, ou m'appartenant"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles/<id>?nom=&description=&prive=repetitions&reposeEntreExercices&reposeEntreCycles",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles/1?nom=Exo&description=Description&prive=0&idCoach=1&repetitions=2&reposEntreCycles=60&reposEntreExercices=20",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles",
+								"1"
+							],
+							"query": [
+								{
+									"key": "nom",
+									"value": "Exo"
+								},
+								{
+									"key": "description",
+									"value": "Description"
+								},
+								{
+									"key": "prive",
+									"value": "0"
+								},
+								{
+									"key": "idCoach",
+									"value": "1"
+								},
+								{
+									"key": "repetitions",
+									"value": "2"
+								},
+								{
+									"key": "reposEntreCycles",
+									"value": "60"
+								},
+								{
+									"key": "reposEntreExercices",
+									"value": "20"
+								}
+							]
+						},
+						"description": "Modification des propriétés d'un cycle, par son propriétaire"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles/<id>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles/2",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles",
+								"2"
+							]
+						},
+						"description": "Supprime un cycle"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles/<id>/exercices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles/1/exercices",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles",
+								"1",
+								"exercices"
+							]
+						},
+						"description": "Liste des exercices d'un cycle. Le cycle doit être public ou m'appartenir"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles/<id>/exercices?idExercice=&ordre=&duree=&repetitions=",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles/1/exercices?idExercice=5&ordre=1&duree=20&repetitions=1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles",
+								"1",
+								"exercices"
+							],
+							"query": [
+								{
+									"key": "idExercice",
+									"value": "5"
+								},
+								{
+									"key": "ordre",
+									"value": "1"
+								},
+								{
+									"key": "duree",
+									"value": "20"
+								},
+								{
+									"key": "repetitions",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Ajout d'un exercice à un cycle m'appartenant, en précisant l'identifiant de l'exercice, son ordre dans le cycle, et éventuellement sa durée et son nombre de répétitions"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles/<id>/exercices/<id>?duree=&repetitions=&ordre=",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles/1/exercices/8?duree=30&repetitions=5&ordre=1&idCoach=1",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles",
+								"1",
+								"exercices",
+								"8"
+							],
+							"query": [
+								{
+									"key": "duree",
+									"value": "30"
+								},
+								{
+									"key": "repetitions",
+									"value": "5"
+								},
+								{
+									"key": "ordre",
+									"value": "1"
+								},
+								{
+									"key": "idCoach",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Modification des propriétés d'un exercice au sein d'un cycle appartenant à l'utilisateur"
+					},
+					"response": []
+				},
+				{
+					"name": "{{api-root}}/cycles/<id>/exercices/<id>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "hash",
+								"value": "{{hash}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{api-root}}/cycles/1/exercices/6",
+							"host": [
+								"{{api-root}}"
+							],
+							"path": [
+								"cycles",
+								"1",
+								"exercices",
+								"6"
+							]
+						},
+						"description": "Suppression d'un exercice dans un cycle, en donnant l'id qui permet de lier l'exercice au cycle"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
