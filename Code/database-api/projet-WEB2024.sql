@@ -137,7 +137,7 @@ INSERT INTO `Reservations` (`account_id`, `trip_id`) VALUES
 --
 
 CREATE TABLE `Trip` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `vehicle_id` int DEFAULT NULL,
   `conversation_id` int DEFAULT NULL,
   `from_location` varchar(255) NOT NULL,
@@ -161,7 +161,7 @@ INSERT INTO `Trip` (`id`, `vehicle_id`, `conversation_id`, `from_location`, `to_
 --
 
 CREATE TABLE `Vehicle` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `conductor_id` int DEFAULT NULL,
   `model` varchar(255) NOT NULL,
   `license_plate` varchar(255) NOT NULL,
