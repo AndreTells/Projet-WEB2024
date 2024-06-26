@@ -18,7 +18,7 @@ header("Access-Control-Allow-Headers: *");
 
 
 // example of how to register a new subdomain list
-registerEndpointList(["POST_test","GET_POST"], function() {apiSendResp(RESP_OK);});
+registerEndpointList(["POST_test","GET_test"], function() {apiSendResp(RESP_OK);});
 
 
 // @todo: move files that aren't public to outside public directory (?)

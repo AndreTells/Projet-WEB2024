@@ -36,7 +36,7 @@ function createUser(){
 
 
 	$hash = password_hash($password, PASSWORD_DEFAULT);
-	$SQL = "INSERT INTO `Account` VALUES (NULL,'{$name}', '{$hash}', '{$mail}', '{$description}', '{$job}', '0');";
+	$SQL = "INSERT INTO `Account` VALUES (NULL,'{$name}', '{$hash}', '{$mail}', '{$description}', '{$job}', NULL, '0');";
 
 	SQLInsert($SQL);
 

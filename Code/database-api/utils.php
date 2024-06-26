@@ -133,7 +133,7 @@ function registerEndpoint($path, $handler){
 **/
 function registerEndpointList($paths, $handler){
 	foreach($paths as $path){
-		registerSubdomain($path, $handler);
+		registerEndpoint($path, $handler);
 	}
 }
 
