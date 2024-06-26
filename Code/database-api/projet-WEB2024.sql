@@ -28,13 +28,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Account` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `hash` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `mail` varchar(255) NOT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
   `job` varchar(255) NOT NULL,
-   `admin` bool
+   `admin` boolean,
+    PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -177,12 +178,6 @@ INSERT INTO `Vehicle` (`id`, `conductor_id`, `model`, `license_plate`, `color`) 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `Account`
---
-ALTER TABLE `Account`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Conversation`
