@@ -11,6 +11,7 @@ $pathHandler    = array();
 include_once "utils.php";
 include_once "constants.php";
 include_once "apiEndpoints/accounts.php";
+include_once "apiEndpoints/vehicles.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");
@@ -33,7 +34,7 @@ $apiStr = $method . "_" . $apiRequest;
 
 // routing to appropriate function
 switch($apiStr){
-	case (bool)preg_match("/^(".getRegisterPathsRegex().")/", $apiStr):
+	case (bool)preg_match("/^(".str_replace('/','\/',getRegisterPathsRegex()).")/", $apiStr):
 		executeHandler($apiStr);
 		break;
 	default:
