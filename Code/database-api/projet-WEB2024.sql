@@ -94,13 +94,12 @@ INSERT INTO `Conversation_Accounts_AUX` (`account_id`, `conversation_id`) VALUES
 --
 
 CREATE TABLE `Message` (
-  `id` int NOT NULL,
-  `conversation_id` int DEFAULT NULL,
-  `posting_account_id` int DEFAULT NULL,
+  `conversation_id` int NOT NULL,
+  `posting_account_id` int NOT NULL,
   `post_time` datetime NOT NULL,
-  `content` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
+  `content` text,
+  PRIMARY KEY(`conversation_id`,`posting_account_id`,`post_time`)
+)
 --
 -- Dumping data for table `Message`
 --
@@ -194,14 +193,6 @@ ALTER TABLE `Conversation`
 ALTER TABLE `Conversation_Accounts_AUX`
   ADD PRIMARY KEY (`account_id`,`conversation_id`),
   ADD KEY `conversation_id` (`conversation_id`);
-
---
--- Indexes for table `Message`
---
-ALTER TABLE `Message`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `conversation_id` (`conversation_id`),
-  ADD KEY `posting_account_id` (`posting_account_id`);
 
 --
 -- Indexes for table `Reservations`
