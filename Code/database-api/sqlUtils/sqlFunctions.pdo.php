@@ -3,7 +3,13 @@
 // V1.0 du 18 mai 2018
 // mostly a copy from the file maLibSQL.php provided during the course
 
-include_once("./sqlUtils/sqlConfiguration.php");
+if (file_exists("./sqlConfiguration.php"))
+	include_once("./sqlConfiguration.php");
+else if (file_exists("../libs/sqlConfiguration.php"))
+	include_once "../libs/sqlConfiguration.php";
+else if (file_exists("libs/sqlConfiguration.php"))
+	include_once "libs/sqlConfiguration.php";
+else die("Fichier config introuvable");
 
 /**
  * @file maLibSQL.php
@@ -177,20 +183,9 @@ function parcoursRs($result)
 	return $tab;
 }
 
-// helper function related to accounts
 
-/**
- * returns the id of the user with the given hash
- * @param string $hash
- * @return int 
-**/
-function hashToId($hash){
-	$hash = protect($hash);	
 
-	$SQL = "SELECT `id` FROM `Account` WHERE hash='{$hash}'";
-	$id = intval(SQLGetChamp($SQL)); 
 
-	return $id;
-} 
+
 
 ?>
