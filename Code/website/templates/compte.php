@@ -1,23 +1,23 @@
-<div class="h1 text-center mb-4 mt-2"> Créer votre compte </div>
+<div class="h1 text-center mb-4 mt-2">Créer votre compte</div>
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <form class="row g-3">
-                <div class="col-md-12 h6 text-center"> Informations de connexion </div>
+            <form class="row g-3" enctype="multipart/form-data">
+                <div class="col-md-12 h6 text-center">Informations de connexion</div>
                 <div class="col-md-12">
                     <label for="inputEmail4" class="form-label">Email</label>
                     <input type="email" class="form-control" id="inputEmail4">
                 </div>
                 <div class="col-md-12">
-                    <label for="inputPassword4" class="form-label">Mot de passe </label>
+                    <label for="inputPassword4" class="form-label">Mot de passe</label>
                     <input type="password" class="form-control" id="inputPassword4">
                 </div>
                 <div class="col-md-12">
-                    <label for="inputPassword4" class="form-label"> Confirmer votre mot de passe </label>
-                    <input type="confirm_password" class="form-control" id="inputPassword_confirm4">
+                    <label for="inputPassword_confirm4" class="form-label">Confirmer votre mot de passe</label>
+                    <input type="password" class="form-control" id="inputPassword_confirm4">
                 </div>
 
-                <div class="col-md-12 h6 text-center"> Véhicule </div>
+                <div class="col-md-12 h6 text-center">Véhicule</div>
                 <div class="col-12">
                     <label for="inputCar" class="form-label">Modèle de voiture</label>
                     <input type="text" class="form-control" id="inputCar" placeholder="Votre modèle de voiture">
@@ -27,8 +27,7 @@
                     <input type="text" class="form-control" id="inputPlace" placeholder="Le nombre de place de votre voiture">
                 </div>
 
-                <div class="col-md-12 h6 text-center"> Quelques informations sur vous </div>
-
+                <div class="col-md-12 h6 text-center">Quelques informations sur vous</div>
                 <div class="col-md-12">
                     <label for="inputPseudo" class="form-label">Pseudo</label>
                     <input type="text" class="form-control" id="inputPseudo" placeholder="Votre pseudo">
@@ -38,8 +37,12 @@
                     <input type="text" class="form-control" id="inputJob" placeholder="Votre métier">
                 </div>
                 <div class="col-md-12">
-                    <label for="inputTel" class="form-label">Tel </label>
+                    <label for="inputTel" class="form-label">Tel</label>
                     <input type="text" class="form-control" id="inputTel" placeholder="Votre téléphone">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputProfilePicture" class="form-label">Photo de profil</label>
+                    <input type="file" class="form-control" id="inputProfilePicture" name="profile_picture">
                 </div>
 
                 <div class="col-12">
@@ -52,5 +55,4 @@
         </div>
     </div>
 </div>
-
 
