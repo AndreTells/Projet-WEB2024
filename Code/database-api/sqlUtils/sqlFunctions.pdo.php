@@ -193,8 +193,4 @@ function hashToId($hash){
 	return $id;
 } 
 
-
-
-
-
 ?>
