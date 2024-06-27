@@ -18,6 +18,13 @@
     background-color: #f6af68;
     border-radius: 30px;
 }
+.premier_plan {
+    z-index: 1050; /* Assurez-vous que ce z-index est plus élevé que les autres éléments */
+    position: relative; /* Ajoutez une position relative pour que le z-index prenne effet */
+}
+.dropdown-menu {
+    z-index: 1050;
+}
 
 #profile_body{
     z-index: -1;
