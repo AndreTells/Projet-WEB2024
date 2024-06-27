@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 27, 2024 at 05:06 AM
+-- Generation Time: Jun 27, 2024 at 10:17 AM
 -- Server version: 8.0.36-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.17
 
@@ -187,8 +187,44 @@ CREATE TABLE `Trip` (
 --
 
 INSERT INTO `Trip` (`id`, `vehicle_id`, `conversation_id`, `from_location`, `to_location`, `places`, `date`) VALUES
-(1, 1, 1, 'Centrale Lille', 'Lens', 4, '2024-07-01 08:00:00'),
+(1, 1, 1, 'Centrale Lille', 'Lens', 3, '2024-07-01 08:00:00'),
 (2, 2, 2, 'Lens', 'Centrale Lille', 4, '2024-07-02 09:00:00');
+
+--
+-- Triggers `Trip`
+--
+DELIMITER $$
+CREATE TRIGGER `trip_car_consistency_INSERT` BEFORE INSERT ON `Trip` FOR EACH ROW BEGIN
+  DECLARE vehicle_places INT;
+  
+  -- Get the current count of reservations for the trip
+  SELECT max_places INTO vehicle_places 
+  FROM Vehicle 
+  WHERE id = NEW.vehicle_id;
+  
+  -- Compare with the limit obtained from the function
+  IF NEW.places > vehicle_places THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'trip cannot have more places than the vehicle';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trip_car_consistency_UPDATE` BEFORE UPDATE ON `Trip` FOR EACH ROW BEGIN
+  DECLARE vehicle_places INT;
+  
+  -- Get the current count of reservations for the trip
+  SELECT max_places INTO vehicle_places 
+  FROM Vehicle 
+  WHERE id = NEW.vehicle_id;
+  
+  -- Compare with the limit obtained from the function
+  IF NEW.places > vehicle_places THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'trip cannot have more places than the vehicle';
+  END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
