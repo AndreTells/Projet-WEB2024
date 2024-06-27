@@ -17,7 +17,7 @@
 
             <div class="h4 mb-3 mt-5"> Pas de compte ? </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary" value="compte">Créer mon compte</button>
+                <a href="index.php?view=compte" class="btn btn-primary">Créer mon compte</a>
             </div>
         </div>
         </form>
