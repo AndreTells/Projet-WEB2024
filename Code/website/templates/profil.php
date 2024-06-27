@@ -15,7 +15,6 @@
             <p>Metier : Etudiant(e)</p>
             <p>Email : victor.pitaud@centrale.centralelille.fr</p>
             <p>Tel : +33781915711</p>
-            <button class="btn btn-primary">Modifier</button>
         </div>
     </div>
     <div id="secondary_ information" class="col-6">

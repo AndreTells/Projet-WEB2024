@@ -112,45 +112,28 @@ function loginGuard($connected){
 	if(!$connected) apiSendResp(RESP_UNAUTHORIZED);
 }
 
-
-/**
- * makes it so all request to the api/$path get routed to $handler
- * @param string $path uri path of the new api request url
- * @param function(str) $handler function that will decided what to do based on the given api request 
-**/
-function registerEndpoint($path, $handler){
+function registerSubdomain($path, $handler){
 	global $registredPaths;
 	global $pathHandler;
 	$registredPaths[] = $path;
 	$pathHandler[$path] = $handler;
 }
 
-/**
- * executes registerEndpoint for every element in paths 
- * @param array[string] $path uri path of the new api request url
- * @param function() $handler function that will decided what to do based on the given api request 
- * @see registerSubdomain
-**/
-function registerEndpointList($paths, $handler){
+function registerSubdomainList($paths, $handler){
+	global $registredPaths;
+	global $pathHandler;
 	foreach($paths as $path){
-		registerEndpoint($path, $handler);
+		$registredPaths[] = $path;
+		$pathHandler[$path] = $handler;
 	}
 }
 
-/**
- * creates a regex limiter that matches if and only if the given string is a registered path
- * @return string a regex delimeter 
-**/
 function getRegisterPathsRegex(){
 	global $registredPaths;
 	if(empty($registredPaths)) return 'matchnothing^';
 	return "^(".implode('|',$registredPaths).")";
 }
 
-/**
- * executes the handler for a given $path
- * @param string $path a registered path for the api, which is to say a path that is associated to a handler in apiHandler
-**/
 function executeHandler($path){
 	global $pathHandler;
 	$pathHandler[$path]();
