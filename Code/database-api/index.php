@@ -16,6 +16,7 @@ include_once "apiEndpoints/trips.php";
 include_once "apiEndpoints/messages.php";
 include_once "apiEndpoints/conversations.php";
 include_once "apiEndpoints/conversations_aux.php";
+include_once "apiEndpoints/feedback.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");

@@ -10,7 +10,6 @@ include_once "sqlUtils/sqlFunctions.pdo.php";
 //Endpoints
 /**
  * Create a conversation
- * @param   int id
  * @param   string title
  * @return  array&object conversation: [{id, title}]
 
@@ -21,7 +20,6 @@ registerEndpoint("POST_conversation/register",'registerConversation');
 /**
  * Returns a list of associated conversations with the given user
  * @param   int id
- * @return  string title
 **/
 registerEndpoint('GET_conversation/info','getConversation');
 
@@ -42,7 +40,7 @@ function registerConversation() {
     }
     $title = protect($title);
 
-    $SQL = "INSERT INTO 'Conversation' VALUES (NULL, '{$title}');";
+    $SQL = "INSERT INTO `Conversation` VALUES (NULL, '{$title}');";
     echo $SQL;
     $rowid = SQLInsert($SQL);
 
@@ -59,7 +57,7 @@ function getConversation() {
         return;
     }
 
-    $SQL = "SELECT 'title' FROM 'Conversation' WHERE id='{$id}';";
+    $SQL = "SELECT `title` FROM 'Conversation' WHERE id='{$id}';";
     $result = RESP_OK;
     $result["id"] = parcoursRs(SQLSelect($SQL));
     apiSendResp($result);
@@ -80,14 +78,14 @@ function deleteConversation() {
                 apiSendResp($result);
             }else{
                 $response = RESP_BAD_REQUEST;
-                $reponse["message"] = "Conversation not found or you are not the owner of this conversation";
+                $response["message"] = "Conversation not found or you are not the owner of this conversation";
                 apiSendResp($response);
             }
             
         }
         else{
             $response = RESP_BAD_REQUEST;
-            $reponse["message"] = "Conversation not found or you are not the owner of this conversation";
+            $response["message"] = "Conversation not found or you are not the owner of this conversation";
             apiSendResp($response);
         }
 

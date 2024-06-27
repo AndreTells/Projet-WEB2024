@@ -45,9 +45,9 @@ DELIMITER ;
 CREATE TABLE `Account` (
   `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
-  `hash` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `hash` varchar(255) CHARACTER SET utf8mb3 NOT NULL,
   `mail` varchar(255) NOT NULL,
-  `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
+  `description` text CHARACTER SET utf8mb3,
   `job` varchar(255) NOT NULL,
   `profile_picture` blob,
   `admin` tinyint(1) DEFAULT NULL
@@ -114,7 +114,7 @@ CREATE TABLE `Message` (
   `posting_account_id` int NOT NULL,
   `post_time` datetime NOT NULL,
   `content` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `Message`
@@ -134,7 +134,7 @@ INSERT INTO `Message` (`conversation_id`, `posting_account_id`, `post_time`, `co
 CREATE TABLE `Reservations` (
   `account_id` int NOT NULL,
   `trip_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `Reservations`
@@ -272,6 +272,21 @@ CREATE TABLE `Vehicle` (
   `license_plate` varchar(255) NOT NULL,
   `max_places` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+
+--
+-- Table structure for table `Feedback`
+--
+
+CREATE TABLE `Feedback` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `prenom` varchar(255) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 
 --
 -- Dumping data for table `Vehicle`
