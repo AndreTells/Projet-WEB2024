@@ -33,7 +33,13 @@
 </div>
 
 <script>
-	let conv_id = -1;
+conv_id = 1;
+function loadMessages(){
+	let request = tryGetMessages(conv_id);
+request.done(function(obj){
+	console.log(obj);
+});
+}
     $(".conv").click(function(){
         $(".selected").removeClass("selected");
         $(this).addClass("selected");
@@ -41,8 +47,14 @@
     });
 
     $("#message-send-btn").on('click', function(){
-	    tryPostMessage(
-    		$("#message-text").val()		    
+	  let request =  tryPostMessage(
+		    conv_id,
+		    $("#message-text").val()
 	);
+	   
+request.done(function(obj){
+	console.log("here");
+	loadMessages();
     });
+});
 </script>

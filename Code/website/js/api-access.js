@@ -1,5 +1,6 @@
 const apiRoot = "http://localhost/database-api/api";
-var toke = `web`;
+var token = `web`;
+var id = 1;
 
 $.ajaxSetup({
 dataType: "json"
@@ -28,7 +29,7 @@ let tryPostFeedback = function(prenom, nom,email,message){
  * @return jqXHR            object of the XMLHTTPRequest made to the api to get the article list
  */
 let tryPostMessage = function(conv_id,content){
-	let request = $post(
+	let request = $.post(
 		apiRoot + "/send-message",
 		{
 		"hash": token,
@@ -38,3 +39,17 @@ let tryPostMessage = function(conv_id,content){
 	);
 	return request;
 }
+
+/**
+ * @return jqXHR            object of the XMLHTTPRequest made to the api to get the article list 
+ */
+let tryGetMessages = function (conv_id){
+        let request = $.getJSON(
+                apiRoot + "/messages",
+		{
+		"conversation_id":conv_id 
+		}
+        );
+        return request;
+}
+
