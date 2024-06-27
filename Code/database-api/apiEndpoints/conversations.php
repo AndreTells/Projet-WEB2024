@@ -41,7 +41,6 @@ function registerConversation() {
     $title = protect($title);
 
     $SQL = "INSERT INTO `Conversation` VALUES (NULL, '{$title}');";
-    echo $SQL;
     $rowid = SQLInsert($SQL);
 
     $result = RESP_OK;
@@ -53,13 +52,13 @@ function registerConversation() {
 function getConversation() {
     $id = validate("id", "REQUEST");
     if (!($id)) {
+        echo $id;
         apiSendResp(RESP_BAD_REQUEST);
         return;
     }
-
-    $SQL = "SELECT `title` FROM 'Conversation' WHERE id='{$id}';";
+    $SQL = "SELECT `title` FROM `Conversation` WHERE id='{$id}';";
     $result = RESP_OK;
-    $result["id"] = parcoursRs(SQLSelect($SQL));
+    $result["id"] = SQLGetChamp($SQL);
     apiSendResp($result);
 }
 

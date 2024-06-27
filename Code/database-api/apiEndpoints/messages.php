@@ -16,6 +16,9 @@ include_once "sqlUtils/sqlFunctions.pdo.php";
 **/
 registerEndpoint("POST_send-message",'sendMessage');
 
+
+registerEndpoint("GET_messages",'getMessages');
+
 // Endpoint Handlers
 /**
  * Sends a message with the current time
@@ -44,4 +47,35 @@ function sendMessage(){
 	$resut = RESP_OK;
 	apiSendResp($resut);
 }
+
+
+
+function getMessages(){
+	if ($conversation_id = validate("conversation_id", "REQUEST")){
+
+		try{
+		$SQL = "SELECT `post_time`, `content`, `posting_account_id`, `name` 
+        FROM `Message` 
+        INNER JOIN `Account` 
+        ON `Message`.`posting_account_id` = `Account`.`id` 
+        WHERE `Message`.`conversation_id` = '{$conversation_id}';";
+
+		$result = RESP_OK;
+		$result["messages"] = parcoursRs(SQLSelect($SQL));
+		apiSendResp($result);
+		}
+		catch(Exception $e){
+			$result = RESP_INTERNAL_ERROR;
+			$result["message"] = $e->getMessage();
+			apiSendResp($result);
+		}
+	}
+	else
+	{
+		$result = RESP_BAD_REQUEST;
+		$result["message"] = "missing conversation_id";
+		apiSendResp(RESP_BAD_REQUEST);
+	}
+}
+
 ?>
