@@ -70,8 +70,9 @@ INSERT INTO `Account` (`id`, `name`, `hash`, `mail`, `description`, `job`, `prof
 --
 
 CREATE TABLE `Conversation` (
-  `id` int NOT NULL,
-  `title` varchar(255) NOT NULL
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -306,13 +307,6 @@ INSERT INTO `Vehicle` (`id`, `conductor_id`, `model`, `license_plate`, `max_plac
 ALTER TABLE `Account`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `Conversation`
---
-ALTER TABLE `Conversation`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `Conversation_Accounts_AUX`
 --
 ALTER TABLE `Conversation_Accounts_AUX`
