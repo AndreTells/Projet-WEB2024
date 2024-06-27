@@ -4,8 +4,9 @@
         <br>
         <div class="subtitle text-center mt-2">Oubliez tous vos soucis, il y a Blabla 2i <br> La première plateforme de covoiturage entre le site de Centrale Lille et le site de l'IG2I à Lens</div>
         <br>
-        <div class="h4 text-center" style="font-weight: bold;">Trouver le covoiturage parfait n'a jamais été aussi <span id="typing-animation" class="orange-bold-text" style="color: #EA8A2C; font-weight: bold;"> simple.</span> <div>
-
+        <div class="h4 text-center" style="font-weight: bold;">
+            Trouver le covoiturage parfait n'a jamais été aussi <span id="typing-animation" style="color: #EA8A2C; font-weight: bold;"></span>
+        </div>
         <br>
 
         <div class="mt-4 btn-group position-relative top-100 start-50 translate-middle" role="group" aria-label="radio sens button group">
@@ -77,8 +78,68 @@
         </div>
     </div>
 </div>
-
 <script>
+    // Fonction pour simuler l'effet de texte tapé sur un clavier
+    function typeWriterEffect(textElement, text, speed, callback) {
+        let i = 0;
+        const typingInterval = setInterval(() => {
+            if (i < text.length) {
+                textElement.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(typingInterval);
+                if (callback) {
+                    callback();
+                }
+            }
+        }, speed);
+    }
+
+    // Fonction pour effacer le texte progressivement
+    function eraseText(textElement, speed, callback) {
+        let i = textElement.textContent.length - 1;
+        const erasingInterval = setInterval(() => {
+            if (i >= 0) {
+                textElement.textContent = textElement.textContent.substring(0, i);
+                i--;
+            } else {
+                clearInterval(erasingInterval);
+                if (callback) {
+                    callback();
+                }
+            }
+        }, speed);
+    }
+
+    // Appel de l'effet d'écriture initial lorsque la fenêtre est chargée
+    window.onload = function () {
+        const textElement = document.getElementById('typing-animation');
+        const speed = 100; // Vitesse de frappe, ajustez selon votre préférence
+
+        // Début de l'effet d'écriture initial avec "simple"
+        typeWriterEffect(textElement, 'simple.', speed, () => {
+            // Après l'écriture de "simple", démarrer l'effet d'effacement
+            setTimeout(() => {
+                eraseText(textElement, speed, () => {
+                    // Après l'effacement, écrire "efficace"
+                    setTimeout(() => {
+                        typeWriterEffect(textElement, 'efficace.', speed, () => {
+                            // Après avoir écrit "efficace", arrêter l'animation
+                            setTimeout(() => {
+                                eraseText(textElement, speed, () => {
+                                    // Après un certain délai, revenir à "simple"
+                                    setTimeout(() => {
+                                        typeWriterEffect(textElement, 'simple.', speed);
+                                    }, 1000); // Délai avant de revenir à "simple" (1000 ms = 1 seconde)
+                                });
+                            }, 1000); // Délai après avoir écrit "efficace" avant de l'effacer
+                        });
+                    }, 1000); // Délai avant d'écrire "efficace" après l'effacement de "simple"
+                });
+            }, 1000); // Délai avant de commencer l'effacement après l'écriture de "simple"
+        });
+    };
+
     function updateDropdown(element) {
         document.getElementById("dropdownNombrePersonnes").textContent = element.textContent;
     }
@@ -86,26 +147,4 @@
     function updateTypeTrajet(type) {
         document.getElementById("dropdownTypeTrajet").textContent = type === 'passager' ? 'Passager' : 'Réserver un véhicule';
     }
-      // Fonction pour simuler l'effet de texte tapé sur un clavier
-      function typeWriterEffect(textElement, text, speed) {
-          let i = 0;
-          const typingInterval = setInterval(() => {
-              if (i < text.length) {
-                  textElement.textContent += text.charAt(i);
-                  i++;
-              } else {
-                  clearInterval(typingInterval);
-              }
-          }, speed);
-      }
-      
-      // Appel de la fonction lorsque la fenêtre est chargée
-      window.onload = function () {
-          const textElement = document.getElementById('typing-animation');
-          const text = "simple.";
-          const speed = 100; // Vitesse de frappe, ajustez selon votre préférence
-          typeWriterEffect(textElement, text, speed);
-      };
-
-
 </script>
