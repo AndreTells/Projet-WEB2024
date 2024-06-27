@@ -1,6 +1,6 @@
 <?php
 /**
- * @file vehicules.php
+ * @file trip.php
  * File containing any and all api request functions pertaining to the vehicules table in the database
 **/
 

@@ -201,14 +201,19 @@ DELIMITER ;
 --
 
 CREATE TABLE `Trip` (
-  `id` int NOT NULL,
-  `vehicle_id` int DEFAULT NULL,
-  `conversation_id` int NOT NULL,
-  `from_location` varchar(255) NOT NULL,
-  `to_location` varchar(255) NOT NULL,
-  `places` int NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+ `id` int(11) NOT NULL,
+ `vehicle_id` int(11) DEFAULT NULL,
+ `conversation_id` int(11) DEFAULT NULL,
+ `from_location` varchar(255) NOT NULL,
+ `to_location` varchar(255) NOT NULL,
+ `hour_depart` varchar(255) NOT NULL,
+ `hour_arrival` varchar(255) NOT NULL,
+ `direction` varchar(255) NOT NULL,
+ `places` int(11) NOT NULL,
+ `date` datetime NOT NULL,
+ `description` text NOT NULL,
+ `conductor_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Trip`

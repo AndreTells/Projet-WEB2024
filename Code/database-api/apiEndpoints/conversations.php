@@ -43,6 +43,7 @@ function registerConversation() {
     $title = protect($title);
 
     $SQL = "INSERT INTO 'Conversation' VALUES (NULL, '{$title}');";
+    echo $SQL;
     $rowid = SQLInsert($SQL);
 
     $result = RESP_OK;
