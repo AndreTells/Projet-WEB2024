@@ -193,13 +193,10 @@ function hashToId($hash){
 	return $id;
 } 
 
+
 function getVehiculeData($hash){
 	$id = hashToId($hash);
 	$SQL = "SELECT * FROM `Vehicle` WHERE conductor_id='{$id}'";
 	$vehicle_data = parcoursRs(SQLSelect($SQL))[0];
 	return $vehicle_data;
 }
-
-
-
-?>

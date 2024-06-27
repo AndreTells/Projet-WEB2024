@@ -123,7 +123,6 @@ CREATE TABLE `Message` (
 INSERT INTO `Message` (`conversation_id`, `posting_account_id`, `post_time`, `content`) VALUES
 (1, 1, '2024-06-20 10:00:00', 'J aime ta base de donnees'),
 (1, 2, '2024-06-20 11:00:00', 'Moi aussi!'),
-(1, 4, '2024-06-27 01:04:58', 'aaaaaaaaa'),
 (2, 3, '2024-06-21 12:00:00', 'Vous dites quoi? Je parle pas français');
 
 -- --------------------------------------------------------
