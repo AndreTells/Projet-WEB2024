@@ -3,7 +3,7 @@
 
 //@todo: use envioronment variables instead for added security
 $BDD_host="localhost";
-$BDD_user="admin";
-$BDD_password="mysql"; 
-$BDD_base="projet-WEB2024"; // nom de la base de données
+$BDD_user="root";
+$BDD_password="root"; 
+$BDD_base="blabla"; // nom de la base de données
 ?>
