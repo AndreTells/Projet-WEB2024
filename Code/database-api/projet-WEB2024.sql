@@ -357,28 +357,28 @@ ALTER TABLE `Vehicle`
 -- Constraints for table `Conversation_Accounts_AUX`
 --
 ALTER TABLE `Conversation_Accounts_AUX`
-  ADD CONSTRAINT `conversation_accounts_aux_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`id`),
-  ADD CONSTRAINT `conversation_accounts_aux_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`);
+  ADD CONSTRAINT `conversation_accounts_aux_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `conversation_accounts_aux_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Message`
 --
 ALTER TABLE `Message`
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`),
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`posting_account_id`) REFERENCES `Account` (`id`);
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`posting_account_id`) REFERENCES `Account` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Trip`
 --
 ALTER TABLE `Trip`
-  ADD CONSTRAINT `trip_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `Vehicle` (`id`),
-  ADD CONSTRAINT `trip_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`);
+  ADD CONSTRAINT `trip_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `Vehicle` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `trip_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `Vehicle`
 --
 ALTER TABLE `Vehicle`
-  ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`conductor_id`) REFERENCES `Account` (`id`);
+  ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`conductor_id`) REFERENCES `Account` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
