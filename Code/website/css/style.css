@@ -133,6 +133,10 @@ body{
 
 /* Messagerie */
 
+.hidden{
+    visibility: hidden;
+}
+
 .selected{
     background-color: rgb(232, 232, 232);
 }
@@ -151,14 +155,13 @@ body{
 }
 
 .message{
-    position: absolute;
     width: fit-content;
     padding: 0.5rem;
+    margin: 0.2rem;
 }
 
 .rm{
     background-color: lightgrey;
-    left: 0px;
     border-radius: 0px 25px 25px 25px;
 }
 
@@ -167,19 +170,9 @@ body{
     border-radius: 25px 25px 0px 25px;
     right: 0px;
     
-}
+} 
 
-#temp-m2{
-    /* top doit être mis en place en fonction de l'ordre des messages lors de la récupération*/
-    top: 6rem;
-}
-
-#temp-m3{
-    /* top doit être mis en place en fonction de l'ordre des messages lors de la récupération*/
-    top: 9rem;
-}
-
-#temp-m4{
-    /* top doit être mis en place en fonction de l'ordre des messages lors de la récupération*/
-    top: 12rem;
+#messages{
+    overflow-y: auto;
+    max-height: 28rem;
 }
