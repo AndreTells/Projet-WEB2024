@@ -193,7 +193,12 @@ function hashToId($hash){
 	return $id;
 } 
 
-
+function getVehicule($hash){
+	$id = hashToId($hash);
+	$SQL = "SELECT `id` FROM `Vehicle` WHERE conductor_id='{$id}'";
+	$vehicle_id = SQLGetChamp($SQL);
+	return $vehicle_id;
+}
 
 
 

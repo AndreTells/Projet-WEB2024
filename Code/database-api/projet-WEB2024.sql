@@ -142,8 +142,13 @@ CREATE TABLE `Trip` (
   `conversation_id` int DEFAULT NULL,
   `from_location` varchar(255) NOT NULL,
   `to_location` varchar(255) NOT NULL,
+  `hour_depart` varchar(255) NOT NULL,
+  `hour_arrival` varchar(255) NOT NULL,
+  `direction` varchar(255) NOT NULL,
   `places` int NOT NULL,
   `date` datetime NOT NULL,
+  `description` text NOT NULL,
+  `conductor_name` varchar(255) NOT NULL,
   PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -151,9 +156,9 @@ CREATE TABLE `Trip` (
 -- Dumping data for table `Trip`
 --
 
-INSERT INTO `Trip` (`id`, `vehicle_id`, `conversation_id`, `from_location`, `to_location`, `places`, `date`) VALUES
-(1, 1, 1, 'Centrale Lille', 'Lens', 4, '2024-07-01 08:00:00'),
-(2, 2, 2, 'Lens', 'Centrale Lille', 4, '2024-07-02 09:00:00');
+INSERT INTO `Trip` (`id`, `vehicle_id`, `conversation_id`, `from_location`, `to_location`, `hour_depart`, `hour_arrival`, `direction`,`places`, `date`, `description`,`conductor_name`) VALUES
+(1, 1, 1, 'Centrale Lille', 'Lens','7:30','9:30','Lens', 4, '2024-07-01 08:00:00', 'Good trip','tom'),
+(2, 2, 2, 'Lens', 'Centrale Lille','7:30','9:30',"Villeneuve", 4, '2024-07-02 09:00:00', 'Nice trip stuff','pedro');
 
 -- --------------------------------------------------------
 
