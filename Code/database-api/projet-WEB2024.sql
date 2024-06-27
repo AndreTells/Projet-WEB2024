@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 27, 2024 at 10:17 AM
+-- Generation Time: Jun 27, 2024 at 02:18 PM
 -- Server version: 8.0.36-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.17
 
@@ -100,6 +100,7 @@ CREATE TABLE `Conversation_Accounts_AUX` (
 INSERT INTO `Conversation_Accounts_AUX` (`account_id`, `conversation_id`) VALUES
 (1, 1),
 (2, 1),
+(1, 2),
 (3, 2);
 
 -- --------------------------------------------------------
@@ -142,13 +143,41 @@ CREATE TABLE `Reservations` (
 
 INSERT INTO `Reservations` (`account_id`, `trip_id`) VALUES
 (1, 1),
-(2, 1),
-(3, 1),
+(1, 2),
 (4, 1);
 
 --
 -- Triggers `Reservations`
 --
+DELIMITER $$
+CREATE TRIGGER `reservation_conversation_consistency_DELETE` AFTER DELETE ON `Reservations` FOR EACH ROW BEGIN
+  DECLARE conv_id INT;
+
+  -- Get the conversation_id for the trip
+  SELECT conversation_id INTO conv_id
+  FROM `Trip`
+  WHERE id = OLD.trip_id;
+  
+  -- Delete from Conversation_Accounts_AUX where account_id and conversation_id match
+  DELETE FROM `Conversation_Accounts_AUX`
+  WHERE `account_id` = OLD.account_id
+    AND `conversation_id` = conv_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `reservation_conversation_consistency_INSERT` BEFORE INSERT ON `Reservations` FOR EACH ROW BEGIN
+  DECLARE conv_id INT;
+  
+  -- Get the current count of reservations for the trip
+  SELECT conversation_id INTO conv_id 
+  FROM `Trip` 
+  WHERE id = NEW.trip_id;
+  
+  INSERT INTO `Conversation_Accounts_AUX` VALUES (NEW.account_id,conv_id);
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `reservation_limit` BEFORE INSERT ON `Reservations` FOR EACH ROW BEGIN
   DECLARE reservation_count INT;
@@ -175,7 +204,7 @@ DELIMITER ;
 CREATE TABLE `Trip` (
   `id` int NOT NULL,
   `vehicle_id` int DEFAULT NULL,
-  `conversation_id` int DEFAULT NULL,
+  `conversation_id` int NOT NULL,
   `from_location` varchar(255) NOT NULL,
   `to_location` varchar(255) NOT NULL,
   `places` int NOT NULL,
