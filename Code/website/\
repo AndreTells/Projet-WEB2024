@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-12">
                     <label for="inputAddress" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                 </div>
 
                 <div class="col-12">
@@ -41,6 +41,10 @@ let request = tryPostFeedback(
 
 request.done(function(obj){
 	console.log("feedback sent");
+	$("#inputEmail4")[0].reset(),
+	$("#inputPassword4").reset(),
+	$("#inputAddress").reset(),
+	$("#message").reset()
 });
 });
 </script>

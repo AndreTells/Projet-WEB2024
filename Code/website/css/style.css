@@ -142,7 +142,6 @@ body{
 }
 
 #conversation input{
-    position: absolute;
     bottom : 0px;
     left: 0px;
     width: 100%;
@@ -151,8 +150,8 @@ body{
 }
 
 .message{
-    position: absolute;
     width: fit-content;
+    align-self: flex-end;
     padding: 0.5rem;
 }
 

@@ -36,30 +36,36 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 			include("templates/profil.php");
 		break;
 
-        case "contact" :
-            include("templates/contact.php");
-            break;
+		case "contact" :
+		    include("templates/contact.php");
+		    break;
 
-        case "compte":
-            include("templates/compte.php");
-            break;
-        case "settings":
-            include("templates/settings.php");
-            break;
+		case "compte":
+		    include("templates/compte.php");
+		    break;
+
+		case "settings":
+		    include("templates/settings.php");
+		    break;
 
 		case "liste_trajets":
 			include("templates/liste_trajets.php");
-		break;
-        case "trajet":
-            include("templates/trajet.php");
-            break;
+			break;
+
+		case "trajet":
+		    include("templates/trajet.php");
+		    break;
+		    
 		case "page":
 			include("templates/page.php");
-		break;
+			break;
 
 		case "messages":
 			include("templates/messages.php");
-		break;
+			break;
+		case "connexion":
+			include("templates/connexion.php");
+			break;
 
 		default : // si le template correspondant à l'argument existe, on l'affiche
 			if (file_exists("templates/$view.php"))
@@ -72,6 +78,5 @@ Les formulaires de toutes les vues générées enverront leurs données vers la 
 	// Qui contient les coordonnées de la personne si elle est connectée
 	include("templates/footer.php");
 
-
-	
+	die("");
 ?>
