@@ -12,6 +12,7 @@ include_once "utils.php";
 include_once "constants.php";
 include_once "apiEndpoints/accounts.php";
 include_once "apiEndpoints/vehicles.php";
+include_once "apiEndpoints/trips.php";
 include_once "apiEndpoints/messages.php";
 
 header("Access-Control-Allow-Origin: *");

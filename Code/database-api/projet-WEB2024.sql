@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 26, 2024 at 01:38 AM
+-- Generation Time: Jun 27, 2024 at 02:18 PM
 -- Server version: 8.0.36-0ubuntu0.22.04.1
 -- PHP Version: 8.1.2-1ubuntu2.17
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 -- Database: `projet-WEB2024`
 --
 
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`admin`@`localhost` FUNCTION `GetTripReservationLimit` (`tripId` INT) RETURNS INT READS SQL DATA
+    DETERMINISTIC
+BEGIN
+     DECLARE res INT;
+     SELECT `Trip`.`places` INTO res FROM `Trip` 
+WHERE `Trip`.`id` = tripId;
+     RETURN res;
+    END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -28,25 +43,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Account` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `hash` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `mail` varchar(255) NOT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
   `job` varchar(255) NOT NULL,
   `profile_picture` blob,
-  `admin` boolean,
-PRIMARY KEY(`id`)
+  `admin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `Account`
 --
 
-INSERT INTO `Account` (`id`, `name`, `hash`, `mail`, `description`, `job`,`profile_picture`,`admin`) VALUES
-(1, 'tom', 'web', 'web@example.com', 'Bio of tom', 'professor',NULL, 0),
-(2, 'pedro', 'password456', 'pedro@example.com', 'Bio of PEDRO', 'etudiant',NULL, 0),
-(3, 'WEB', '123', 'WEB@example.com', 'Bio of WEB', 'subject',NULL, 0 );
+INSERT INTO `Account` (`id`, `name`, `hash`, `mail`, `description`, `job`, `profile_picture`, `admin`) VALUES
+(1, 'tom', 'web', 'web@example.com', 'Bio of tom', 'professor', NULL, 0),
+(2, 'pedro', 'password456', 'pedro@example.com', 'Bio of PEDRO', 'etudiant', NULL, 0),
+(3, 'WEB', '123', 'WEB@example.com', 'Bio of WEB', 'subject', NULL, 0),
+(4, 'andre', '$2y$10$YTUtsYgaBW0pbeeL1f8eMOJpD3wPlPxWDacoqsbOz9o8Rw85P1mGi', 'aaa', 'tecuhsaochuhao', 'etudiant', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -85,6 +100,7 @@ CREATE TABLE `Conversation_Accounts_AUX` (
 INSERT INTO `Conversation_Accounts_AUX` (`account_id`, `conversation_id`) VALUES
 (1, 1),
 (2, 1),
+(1, 2),
 (3, 2);
 
 -- --------------------------------------------------------
@@ -97,9 +113,9 @@ CREATE TABLE `Message` (
   `conversation_id` int NOT NULL,
   `posting_account_id` int NOT NULL,
   `post_time` datetime NOT NULL,
-  `content` text,
-  PRIMARY KEY(`conversation_id`,`posting_account_id`,`post_time`)
-);
+  `content` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
 -- Dumping data for table `Message`
 --
@@ -118,7 +134,7 @@ INSERT INTO `Message` (`conversation_id`, `posting_account_id`, `post_time`, `co
 CREATE TABLE `Reservations` (
   `account_id` int NOT NULL,
   `trip_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `Reservations`
@@ -126,8 +142,57 @@ CREATE TABLE `Reservations` (
 
 INSERT INTO `Reservations` (`account_id`, `trip_id`) VALUES
 (1, 1),
-(2, 1),
-(3, 2);
+(1, 2),
+(4, 1);
+
+--
+-- Triggers `Reservations`
+--
+DELIMITER $$
+CREATE TRIGGER `reservation_conversation_consistency_DELETE` AFTER DELETE ON `Reservations` FOR EACH ROW BEGIN
+  DECLARE conv_id INT;
+
+  -- Get the conversation_id for the trip
+  SELECT conversation_id INTO conv_id
+  FROM `Trip`
+  WHERE id = OLD.trip_id;
+  
+  -- Delete from Conversation_Accounts_AUX where account_id and conversation_id match
+  DELETE FROM `Conversation_Accounts_AUX`
+  WHERE `account_id` = OLD.account_id
+    AND `conversation_id` = conv_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `reservation_conversation_consistency_INSERT` BEFORE INSERT ON `Reservations` FOR EACH ROW BEGIN
+  DECLARE conv_id INT;
+  
+  -- Get the current count of reservations for the trip
+  SELECT conversation_id INTO conv_id 
+  FROM `Trip` 
+  WHERE id = NEW.trip_id;
+  
+  INSERT INTO `Conversation_Accounts_AUX` VALUES (NEW.account_id,conv_id);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `reservation_limit` BEFORE INSERT ON `Reservations` FOR EACH ROW BEGIN
+  DECLARE reservation_count INT;
+  
+  -- Get the current count of reservations for the trip
+  SELECT COUNT(*) INTO reservation_count 
+  FROM Reservations 
+  WHERE trip_id = NEW.trip_id;
+  
+  -- Compare with the limit obtained from the function
+  IF GetTripReservationLimit(NEW.trip_id) <= reservation_count THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'trip is already full';
+  END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -136,14 +201,13 @@ INSERT INTO `Reservations` (`account_id`, `trip_id`) VALUES
 --
 
 CREATE TABLE `Trip` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
   `vehicle_id` int DEFAULT NULL,
-  `conversation_id` int DEFAULT NULL,
+  `conversation_id` int NOT NULL,
   `from_location` varchar(255) NOT NULL,
   `to_location` varchar(255) NOT NULL,
   `places` int NOT NULL,
-  `date` datetime NOT NULL,
-  PRIMARY KEY(`id`)
+  `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -151,8 +215,44 @@ CREATE TABLE `Trip` (
 --
 
 INSERT INTO `Trip` (`id`, `vehicle_id`, `conversation_id`, `from_location`, `to_location`, `places`, `date`) VALUES
-(1, 1, 1, 'Centrale Lille', 'Lens', 4, '2024-07-01 08:00:00'),
+(1, 1, 1, 'Centrale Lille', 'Lens', 3, '2024-07-01 08:00:00'),
 (2, 2, 2, 'Lens', 'Centrale Lille', 4, '2024-07-02 09:00:00');
+
+--
+-- Triggers `Trip`
+--
+DELIMITER $$
+CREATE TRIGGER `trip_car_consistency_INSERT` BEFORE INSERT ON `Trip` FOR EACH ROW BEGIN
+  DECLARE vehicle_places INT;
+  
+  -- Get the current count of reservations for the trip
+  SELECT max_places INTO vehicle_places 
+  FROM Vehicle 
+  WHERE id = NEW.vehicle_id;
+  
+  -- Compare with the limit obtained from the function
+  IF NEW.places > vehicle_places THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'trip cannot have more places than the vehicle';
+  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trip_car_consistency_UPDATE` BEFORE UPDATE ON `Trip` FOR EACH ROW BEGIN
+  DECLARE vehicle_places INT;
+  
+  -- Get the current count of reservations for the trip
+  SELECT max_places INTO vehicle_places 
+  FROM Vehicle 
+  WHERE id = NEW.vehicle_id;
+  
+  -- Compare with the limit obtained from the function
+  IF NEW.places > vehicle_places THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'trip cannot have more places than the vehicle';
+  END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -161,26 +261,30 @@ INSERT INTO `Trip` (`id`, `vehicle_id`, `conversation_id`, `from_location`, `to_
 --
 
 CREATE TABLE `Vehicle` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
   `conductor_id` int DEFAULT NULL,
   `model` varchar(255) NOT NULL,
   `license_plate` varchar(255) NOT NULL,
-  `max_places` int NOT NULL,
-  `image` blob NULL,
-  PRIMARY KEY(`id`)
+  `max_places` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `Vehicle`
 --
 
-INSERT INTO `Vehicle` (`id`, `conductor_id`, `model`, `license_plate`, `max_places`,`image`) VALUES
-(1, 1, 'Toyota Prius', 'ABC123', 3, NULL),
-(2, 2, 'Honda Civic', 'DEF456', 4, NULL);
+INSERT INTO `Vehicle` (`id`, `conductor_id`, `model`, `license_plate`, `max_places`) VALUES
+(1, 1, 'Toyota Prius', 'ABC123', 3),
+(2, 2, 'Honda Civic', 'DEF456', 4);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `Account`
+--
+ALTER TABLE `Account`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `Conversation`
@@ -196,16 +300,23 @@ ALTER TABLE `Conversation_Accounts_AUX`
   ADD KEY `conversation_id` (`conversation_id`);
 
 --
+-- Indexes for table `Message`
+--
+ALTER TABLE `Message`
+  ADD PRIMARY KEY (`conversation_id`,`posting_account_id`,`post_time`),
+  ADD KEY `message_ibfk_2` (`posting_account_id`);
+
+--
 -- Indexes for table `Reservations`
 --
 ALTER TABLE `Reservations`
-  ADD PRIMARY KEY (`account_id`,`trip_id`),
-  ADD KEY `trip_id` (`trip_id`);
+  ADD PRIMARY KEY (`account_id`,`trip_id`);
 
 --
 -- Indexes for table `Trip`
 --
 ALTER TABLE `Trip`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `vehicle_id` (`vehicle_id`),
   ADD KEY `conversation_id` (`conversation_id`);
 
@@ -213,7 +324,30 @@ ALTER TABLE `Trip`
 -- Indexes for table `Vehicle`
 --
 ALTER TABLE `Vehicle`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `conductor_id` (`conductor_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Account`
+--
+ALTER TABLE `Account`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `Trip`
+--
+ALTER TABLE `Trip`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `Vehicle`
+--
+ALTER TABLE `Vehicle`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -223,35 +357,28 @@ ALTER TABLE `Vehicle`
 -- Constraints for table `Conversation_Accounts_AUX`
 --
 ALTER TABLE `Conversation_Accounts_AUX`
-  ADD CONSTRAINT `conversation_accounts_aux_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `conversation_accounts_aux_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `conversation_accounts_aux_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`id`),
+  ADD CONSTRAINT `conversation_accounts_aux_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`);
 
 --
 -- Constraints for table `Message`
 --
 ALTER TABLE `Message`
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`posting_account_id`) REFERENCES `Account` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `Reservations`
---
-ALTER TABLE `Reservations`
-  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `Account` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`trip_id`) REFERENCES `Trip` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`),
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`posting_account_id`) REFERENCES `Account` (`id`);
 
 --
 -- Constraints for table `Trip`
 --
 ALTER TABLE `Trip`
-  ADD CONSTRAINT `trip_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `Vehicle` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `trip_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `trip_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `Vehicle` (`id`),
+  ADD CONSTRAINT `trip_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `Conversation` (`id`);
 
 --
 -- Constraints for table `Vehicle`
 --
 ALTER TABLE `Vehicle`
-  ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`conductor_id`) REFERENCES `Account` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `vehicle_ibfk_1` FOREIGN KEY (`conductor_id`) REFERENCES `Account` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

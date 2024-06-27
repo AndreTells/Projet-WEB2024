@@ -105,7 +105,7 @@ function getUserVehiclesInfo(){
     $SQL = "SELECT `id`,`model`,`license_plate`,`max_places`,`image` FROM `Vehicle` WHERE conductor_id='{$vehicleOwner}';";
     $result = RESP_OK;
     $result["vehicles"] = parcoursRs(SQLSelect($SQL));
-    $result["id"] = $vehicleOwner;
+    $result["id-owner"] = $vehicleOwner;
     apiSendResp($result);
 
 }
