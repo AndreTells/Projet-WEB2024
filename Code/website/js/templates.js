@@ -5,7 +5,7 @@ const messageTemplate = (obj) =>$(`
 
 
 const convTemplate = (obj) =>$(`
-            <div class="conv pt-2 pb-2 d-flex justify-content-around align-items-center selected">
+            <div class="conv pt-2 pb-2 d-flex justify-content-around align-items-center">
 <h6>${obj.title}</h6>
             </div>
 `)
