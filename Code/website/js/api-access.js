@@ -1,10 +1,11 @@
 const apiRoot = "http://localhost/database-api/api";
-var token = `web`;
-var id = 1;
-
-$.ajaxSetup({
-	dataType: "json"
+var token = false;
+$(document).ready(function(){
+	if($("#hash-field").length){
+		token = $("#hash-field").val();
+	}
 });
+
 /**
  * @param string param      string containing the title for the new article
  * @return jqXHR            object of the XMLHTTPRequest made to the api to get the article list
@@ -81,4 +82,57 @@ let tryGetTripById = function (id) {
 	);
 
 	return request;
+}
+
+
+
+/**
+ * @param string login      string containing the login typed by the user
+ * @param string password   string containing the password typed by the user
+ * @return jqXHR            object of the XMLHTTPRequest made to the api to login the user
+ */
+let tryPostAuthenticate = function(user,password){
+	console.log("attempting to login:" + user+ " "+ password);
+        let request = $.post(
+                apiRoot + "/authenticate",
+                {"name": user, "password": password},
+                "json"
+        )
+        request.done(function(obj){
+                obj = JSON.parse(obj);
+		if(!obj["success"]) return;
+                console.log("token was registered");
+                token = obj.hash;
+                $.ajaxSetup({
+                        dataType: "json"
+                });
+        });
+        return request;
+}
+
+/**
+ * @param string param      string containing the title for the new article
+ * @return jqXHR            object of the XMLHTTPRequest made to the api to get the article list
+ */
+let tryPostCreateUser = function(user,password){
+	let request = $.post(
+		apiRoot + "/create-user",
+		{
+		"name": user,
+		"password": password,
+		"mail": " ",
+		"description": " ",
+		"job": " "
+		}
+	);
+        request.done(function(obj){
+                obj = JSON.parse(obj);
+		if(!obj["success"]) return;
+                console.log("token was registered");
+                token = obj.hash;
+                $.ajaxSetup({
+                        dataType: "json"
+                });
+        });
+        return request;
 }
