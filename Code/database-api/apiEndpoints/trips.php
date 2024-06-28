@@ -25,6 +25,7 @@ include_once "sqlUtils/sqlFunctions.pdo.php";
 registerEndpoint("POST_trip/register",'registerTrip');
 
 
+
 /**
  * Returns a list of all trips
  * @return array&object trips: [{trip-id, vehicle-id, conversation-id, from, to, hour_depart, hour_arrival, direction, places, date, description, conductor-name}]
@@ -33,6 +34,9 @@ registerEndpoint("GET_trip/list",'getTripList');
 
 
 registerEndpoint("GET_trip/user-created",'getTripsCreatedByUser');
+
+
+registerEndpoint("GET_trip/id","getTripById");
 
 
 function registerTrip(){
@@ -119,6 +123,14 @@ function getTripsCreatedByUser(){
 
 }
 
+function getTripById(){
+    $trip_id= validate("id", "REQUEST");
+    $SQL="SELECT * FROM `Trip` WHERE `id`='{$trip_id}';";
+    $response = RESP_OK;
+    $response['trip'] = parcoursRs(SQLSelect($SQL))[0];
+    apiSendResp($response);
+}
+
 
 # Util
 function hashToIdName($hash){
@@ -128,5 +140,7 @@ function hashToIdName($hash){
     $response = parcoursRs(SQLSelect($SQL));
     return $response[0];
 }
+
+
 
 ?>
