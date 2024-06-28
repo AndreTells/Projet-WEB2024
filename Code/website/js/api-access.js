@@ -53,3 +53,16 @@ let tryGetMessages = function (conv_id){
         return request;
 }
 
+/**
+ * @return jqXHR            object of the XMLHTTPRequest made to the api to get the article list 
+ */
+let tryGetConversations = function (){
+        let request = $.getJSON(
+                apiRoot + "/conversation_aux/info",   
+		{
+		"hash": token
+		}
+        );
+        return request;
+}
+
