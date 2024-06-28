@@ -48,7 +48,7 @@ function registerTrip(){
     $date         = validate("date", "REQUEST");
     $description  = validate("description", "REQUEST");
     $hash         = validate("hash", "REQUEST");
-    $conversation_id = validate("conversation_id", "REQUEST");
+    $conversation_id = validate("conversation_id", "REQUEST"); 
     
     if (!($from and $to and $hour_depart and $hour_arrival and $direction and $date and $description and $hash and $conversation_id)){
         $response = RESP_BAD_REQUEST;
@@ -60,6 +60,7 @@ function registerTrip(){
     $userName = $idName["name"];
     $datetime = new DateTime($date);
     $formattedDate = $datetime->format("Y-m-d H:i:s");
+
     $conversation_id = intval($conversation_id);
 
     $vehicle = getVehiculeData($hash);
