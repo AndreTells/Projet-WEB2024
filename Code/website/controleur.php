@@ -7,6 +7,8 @@ session_start();
 	include_once "libs/modele.php"; 
 
 	$qs = "";
+	
+
 
 	if ($action = valider("action"))
 	{

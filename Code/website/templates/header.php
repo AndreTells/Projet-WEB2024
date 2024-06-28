@@ -33,7 +33,11 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 <!-- **** B O D Y **** -->
 
 <body>
-	
+<?php
+if($hash = valider("hash", "SESSION")){
+echo "<input type='hidden' value='".$_SESSION["hash"]."' id='hash-field'></input>";
+}
+?>
 	<nav class="navbar navbar-expand-lg bg-main-color">
 		<div class="container-fluid">
             <span class="navbar-brand mb-0 h1"><a href="index.php" style="text-decoration: none; color: inherit;">Blabla 2i</a></span>

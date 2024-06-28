@@ -54,6 +54,7 @@ function loadConverstations(){
 	});
 }
 	setInterval(loadMessages, 5000); 
+	setInterval(loadConverstations, 5000); 
     $(document).on('click', '.conv div', function(){
         $(".selected").removeClass("selected");
         $(this).addClass("selected");
